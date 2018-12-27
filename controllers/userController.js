@@ -1,7 +1,7 @@
 const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const keys = require("../../config/keys");
+const keys = require("../config/keys");
 const passport = require("passport");
 
 // Defining methods for the booksController
