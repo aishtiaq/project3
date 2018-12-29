@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import MyDashboard from "./components/MyDashboard";
+import Home from "./components/Home";
 import {Provider} from 'react-redux';
 import store from './store';
 import Register from "./components/Register";
@@ -13,6 +14,8 @@ function App() {
       <div>
        
         <Switch>
+
+          <Route exact path="/" component={Home} />
           <Route exact path="/mydashboard" component={MyDashboard} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
@@ -23,6 +26,7 @@ function App() {
     </Provider>
     
   );
-}
+};
+
 
 export default App;
