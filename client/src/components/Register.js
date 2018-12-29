@@ -5,8 +5,10 @@ class Register extends Component {
     constructor() {
         super();
         this.state = {
-            name: "",
+            firstName: "",
+            lastName: "",
             email: "",
+            phone: "",
             password: "",
             password2: "",
             errors: {}
@@ -21,8 +23,10 @@ class Register extends Component {
         e.preventDefault();
 
         const newUser = {
-            name: this.state.name,
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
             email: this.state.email,
+            phone: this.state.phone,
             password: this.state.password,
             password2: this.state.password2
         };
@@ -51,12 +55,22 @@ class Register extends Component {
                     <div className="input-field col s12">
                       <input
                         onChange={this.onChange}
-                        value={this.state.name}
-                        error={errors.name}
-                        id="name"
+                        value={this.state.firstName}
+                        error={errors.firstName}
+                        id="firstName"
                         type="text"
                       />
-                      <label htmlFor="name">Name</label>
+                      <label htmlFor="name">First Name</label>
+                    </div>
+                    <div className="input-field col s12">
+                      <input
+                        onChange={this.onChange}
+                        value={this.state.lastName}
+                        error={errors.lastName}
+                        id="lastName"
+                        type="text"
+                      />
+                      <label htmlFor="name">Last Name</label>
                     </div>
                     <div className="input-field col s12">
                       <input
@@ -67,6 +81,16 @@ class Register extends Component {
                         type="email"
                       />
                       <label htmlFor="email">Email</label>
+                    </div>
+                    <div className="input-field col s12">
+                      <input
+                        onChange={this.onChange}
+                        value={this.state.phone}
+                        error={errors.phone}
+                        id="phone"
+                        type="text"
+                      />
+                      <label htmlFor="name">Phone #</label>
                     </div>
                     <div className="input-field col s12">
                       <input
