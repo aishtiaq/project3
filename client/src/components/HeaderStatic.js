@@ -3,18 +3,48 @@ import styled from "styled-components";
 export const HeaderText = styled.h1`
   font-family: ${props => props.theme.font};
   font-size: 50px;
+  padding-left: 50px;
+  width: 50%;
+
+  ::before {
+    content: '🚀';
+    margin-right: 25px;
+  }
 `;
 
 export const HeaderWrapper = styled.div`
-    margin-right: auto;
-    margin-left: auto;
-    max-width: auto;
+  margin-right: auto;
+  margin-left: auto;
+  max-width: auto;
 
-    height: 50px;
+  height: 200px;
 
-    /* padding-right: 10px;
-    padding-left: 10px; */
+  background-color: papayawhip;
 
-    border: 5px solid red;
+  /* padding-right: 10px;
+  padding-left: 10px; */
+
+  border: 5px solid red;
 `;
+
+export const LoginButton = styled.button`
+  background: yellow;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 2px solid palevioletred;
+  border-radius: 5px;
+
+  ::before {
+    content: '🚀';
+  }
+
+  :hover {
+    color: red;
+  }
+  `;
+
+
+
+
 
