@@ -60,7 +60,7 @@ class Register extends Component {
                         id="firstName"
                         type="text"
                       />
-                      <label htmlFor="name">First Name</label>
+                      <label htmlFor="firstName">First Name</label>
                     </div>
                     <div className="input-field col s12">
                       <input
@@ -70,7 +70,7 @@ class Register extends Component {
                         id="lastName"
                         type="text"
                       />
-                      <label htmlFor="name">Last Name</label>
+                      <label htmlFor="lastName">Last Name</label>
                     </div>
                     <div className="input-field col s12">
                       <input
@@ -90,7 +90,7 @@ class Register extends Component {
                         id="phone"
                         type="text"
                       />
-                      <label htmlFor="name">Phone #</label>
+                      <label htmlFor="phone">Phone #</label>
                     </div>
                     <div className="input-field col s12">
                       <input
