@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import API from "../utils/API";
 
 class Login extends Component {
     constructor() {
@@ -23,6 +24,12 @@ class Login extends Component {
             password: this.state.password
         };
         console.log(userData);
+
+        API.postUserLogin(userData)
+          .then(res => console.log(res.data))
+          .catch(err => console.log(err));
+
+        window.location.replace("/mydashboard");
     };
 
     render() {
