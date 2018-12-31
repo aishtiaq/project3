@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import API from "../utils/API";
 
 class Register extends Component {
     constructor() {
@@ -14,6 +15,15 @@ class Register extends Component {
             errors: {}
         };
     }
+
+    loadUsers = () => {
+      API.getRegisteredUsers()
+        .then(res=>
+            console.log(res.data)
+          //this.setState({ firstName: "", lastName: "", email: "", phone: "", password: "", password2: "" })
+          )
+          .catch(err => console.log(err));
+    };
 
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -30,7 +40,15 @@ class Register extends Component {
             password: this.state.password,
             password2: this.state.password2
         };
-        console.log(newUser);
+        if (newUser.password === newUser.password2) {
+          console.log(newUser);
+          API.postRegisteredUser(newUser)
+            .then(res => console.log(res.data))
+            .catch(err => console.log(err));
+          } else {
+            alert("Please confirm your password matches.")
+        };
+        window.location.replace("/");
     };
 
     render() {

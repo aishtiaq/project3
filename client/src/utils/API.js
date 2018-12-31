@@ -3,19 +3,19 @@ import axios from "axios";
 export default {
   //Get all registered users
   getRegisteredUsers: function() {
-      return axios.get("/api/register");
+      return axios.get("/api/users/register");
   },
   //Post new user registration
   postRegisteredUser: function(regData) {
-      return axios.post("/api/register", regData)
+      return axios.post("/api/users/register", regData)
   },
   //Get user login
   getUserLogin: function() {
-      return axios.get("/api/login");
+      return axios.get("/api/users/login");
   },
   //Post user login
   postUserLogin: function(userLogin) {
-      return axios.post("/api/login", userLogin)
+      return axios.post("/api/users/login", userLogin)
   }
 
 };

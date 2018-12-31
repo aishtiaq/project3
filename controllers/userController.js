@@ -11,21 +11,20 @@ module.exports = {
         if (user) {
           return res.status(400).json({ email: "Email already exists" });
         } else {
-          const newUser = new User({
+          const newUser = {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
             password: req.body.password,
             phone: req.body.phone
-          });
-    
+          };
+          console.log(newUser);
           // Hash password before saving in database
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {
               if (err) throw err;
               newUser.password = hash;
-              newUser
-                .save()
+              db.Users.create(newUser)
                 .then(user => res.json(user))
                 .catch(err => console.log(err));
             });
