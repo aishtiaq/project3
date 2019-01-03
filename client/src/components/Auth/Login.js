@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import API from "../utils/API";
+import { Link} from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { loginUser } from "../../actions/authActions";
 
 class Login extends Component {
     constructor() {
@@ -10,6 +12,26 @@ class Login extends Component {
             password: "",
             errors: {}
         };
+    }
+
+
+    componentDidMount() {
+      // If logged in and user navigates to Login page, should redirect them to dashboard
+      if (this.props.auth.isAuthenticated) {
+        this.props.history.push("/mydashboard");
+      }
+    }
+  
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.auth.isAuthenticated) {
+        this.props.history.push("/mydashboard");
+      }
+  
+      if (nextProps.errors) {
+        this.setState({
+          errors: nextProps.errors
+        });
+      }
     }
 
     onChange = e => {
@@ -25,11 +47,12 @@ class Login extends Component {
         };
         console.log(userData);
 
-        API.postUserLogin(userData)
-          .then(res => console.log(res.data))
-          .catch(err => console.log(err));
+        this.props.loginUser(userData);
+        // API.postUserLogin(userData)
+        //   .then(res => console.log(res.data))
+        //   .catch(err => console.log(err));
 
-        window.location.replace("/mydashboard");
+        // window.location.replace("/mydashboard");
     };
 
     render() {
@@ -91,6 +114,17 @@ class Login extends Component {
     );
     }
 }
-    export default Login;
+
+Login.propTypes = {
+  loginUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+export default connect(mapStateToProps,{ loginUser })(Login);
 
 

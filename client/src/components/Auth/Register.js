@@ -1,6 +1,8 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import API from "../utils/API";
+import { Link , withRouter } from "react-router-dom";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions/authActions";
 
 class Register extends Component {
     constructor() {
@@ -15,16 +17,22 @@ class Register extends Component {
             errors: {}
         };
     }
+    componentDidMount() {
+      // If logged in and user navigates to Register page, should redirect them to dashboard
+      if (this.props.auth.isAuthenticated) {
+        this.props.history.push("/mydashboard");
+      }
+    }
+  
+    componentWillReceiveProps(nextProps) {
+      if (nextProps.errors) {
+        this.setState({
+          errors: nextProps.errors
+        });
+      }
+    }
 
-    loadUsers = () => {
-      API.getRegisteredUsers()
-        .then(res=>
-            console.log(res.data)
-          //this.setState({ firstName: "", lastName: "", email: "", phone: "", password: "", password2: "" })
-          )
-          .catch(err => console.log(err));
-    };
-
+    
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
@@ -37,18 +45,18 @@ class Register extends Component {
             lastName: this.state.lastName,
             email: this.state.email,
             phone: this.state.phone,
-            password: this.state.password,
-            password2: this.state.password2
+            password: this.state.password
         };
         if (newUser.password === newUser.password2) {
           console.log(newUser);
-          API.postRegisteredUser(newUser)
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err));
-          } else {
-            alert("Please confirm your password matches.")
+          this.props.registerUser(newUser, this.props.history);
+          // API.postRegisteredUser(newUser)
+          //   .then(res => console.log(res.data))
+          //   .catch(err => console.log(err));
+          // } else {
+          //   alert("Please confirm your password matches.")
         };
-        window.location.replace("/");
+        // window.location.replace("/");
     };
 
     render() {
@@ -151,7 +159,19 @@ class Register extends Component {
         );
     };
 };
-      export default Register;
+
+Register.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+  errors: state.errors
+});
+
+export default connect(mapStateToProps,{ registerUser })(withRouter(Register));
 
     
 

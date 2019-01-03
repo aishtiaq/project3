@@ -2,6 +2,7 @@ import React from 'react';
 import Task from './Task';
 import styled from 'styled-components';
 import {Droppable} from 'react-beautiful-dnd';
+import Modal from '../Modal';
 
 const Container = styled.div`
   margin: 10px;
@@ -31,11 +32,22 @@ const TaskList = styled.div`
 
 class Column extends React.Component {
 
+  state = {
+    show: false
+  }
+  showModal = () => {
+    this.setState({ show: true });
+  };
 
-    addTask = id => {
-        console.log("+ clicked");
-        console.log(id);
-    }
+  hideModal = () => {
+    this.setState({ show: false , msg: ""});
+  };
+
+  addTask = id => {
+      console.log("+ clicked");
+      console.log(id);
+      this.showModal();
+  }
 
   render() {
     return (
@@ -58,6 +70,9 @@ class Column extends React.Component {
             </TaskList>
           )}
         </Droppable>
+        <Modal show={this.state.show} handleClose={this.hideModal}>
+            {/* add modal details here */}
+        </Modal>
       </Container>
     );
   }
