@@ -33,7 +33,12 @@ const TaskList = styled.div`
 class Column extends React.Component {
 
   state = {
-    show: false
+    show: false,
+    clickedID: "",
+    taskName: "",
+    taskDetails: "",
+    dueDate: "",
+    errors: {}
   }
   showModal = () => {
     this.setState({ show: true });
@@ -49,14 +54,19 @@ class Column extends React.Component {
       this.showModal();
   }
 
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
+
   onSubmit = () => {
-    let taskName = document.getElementById("taskName").value;
-    let taskDetails = document.getElementById("taskDetails").value;
-    let dueDate = document.getElementById("dueDate").value;
-    console.log(taskName);
-    console.log(taskDetails);
-    console.log(dueDate);
-  }
+    let task = {
+      taskName: this.state.taskName,
+      taskDetails: this.state.taskDetails,
+      dueDate: this.state.dueDate,
+      status: status
+    };
+    console.log(task);
+  };
 
   render() {
     return (
@@ -84,15 +94,38 @@ class Column extends React.Component {
               <form>
                 <div className="form-group">
                   <label htmlFor="taskName">Task Name:</label>
-                  <input className="form-control" id="taskName" type="text" placeholder="Task Name"></input>
+                  <input 
+                    onChange={this.onChange}
+                    value={this.state.taskName}
+                    errors={this.errors.taskName}
+                    type="text"
+                    className="form-control" 
+                    id="taskName" type="text" 
+                    placeholder="Task Name" 
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="taskDetails">Task Details:</label>
-                  <textarea className="form-control" id="taskDetails" rows="5" cols="30" placeholder="Task Details"></textarea>
+                  <textarea 
+                    onChange={this.onChange}
+                    value={this.state.taskDetails}
+                    errors={this.errors.taskDetails}
+                    className="form-control" 
+                    id="taskDetails" 
+                    rows="5" 
+                    cols="30" 
+                    placeholder="Task Details" 
+                  />
                 </div>
                 <div className="form-group">
                   <label htmlFor="dueDate">Due Date:</label>
-                  <input id="dueDate" type="date"></input>
+                  <input 
+                    onChange={this.onChange}
+                    value={this.state.dueDate}
+                    errors={this.errors.dueDate}
+                    id="dueDate" 
+                    type="date" 
+                  />
                 </div>
                 <div className="btn-group">
                   <button type="button" className="btn btn-danger" onClick={this.onSubmit}>Submit</button>
