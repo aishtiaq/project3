@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from 'styled-components';
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, LoginButton, Footer, AnimateLogo } from "./HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, AnimateLogo } from "./HomeStyle";
 // import { BodyWrapper } from "./HomeBody";
 import { Link } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export default () => (
           <HeaderText>TASK MASTER
             <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
-            <LoginButton>
+            <Button>
               <Link
                 to="/register"
                 style={{
@@ -39,7 +39,7 @@ export default () => (
               >
                 Log In
               </Link>
-            </LoginButton>
+            </Button>
           </HeaderWrapper>
         <AnimateLogo className="custom-animate">css animate goes here</AnimateLogo>
         <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
