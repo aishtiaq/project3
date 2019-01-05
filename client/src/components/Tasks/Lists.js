@@ -5,7 +5,7 @@ import { fetchTasks, editTask } from '../../actions/taskActions'
 import {DragDropContext} from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { HeaderWrapper, HeaderText, CatchPhrase, LogoutButton, Footer } from "./DashboardStyle";
+//import { HeaderWrapper, HeaderText, CatchPhrase, LogoutButton, Footer } from "./DashboardStyle";
 import { ThemeProvider } from 'styled-components';
 // import { HeaderText, HeaderWrapper } from "../Home/HeaderStatic";
 import { logoutUser } from "../../actions/authActions";
@@ -19,7 +19,7 @@ const theme = {
   font: "Abel, sans-serif",
 };
 
-class MyDashboard extends Component {
+class Lists extends Component {
 
     componentWillMount() {
       this.props.fetchTasks();
@@ -60,10 +60,7 @@ class MyDashboard extends Component {
         }
       };
   
-  handleLogout = e => {
-    e.preventDefault();
-    this.props.logoutUser();
-  };
+  
 
 
   render() {
@@ -71,25 +68,7 @@ class MyDashboard extends Component {
       <ThemeProvider theme={theme}>
       <div>
         
-      <HeaderWrapper>
-          <HeaderText>TASK MASTER
-          <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
-          </HeaderText>
-            <LogoutButton>
-              <button
-              to="/register"
-              style={{
-                width: "140px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
-              onClick={this.handleLogout}
-              className="btn mx-2 btn-primary"
-            >
-              Logout
-            </button>
-            </LogoutButton>
-      </HeaderWrapper>
+      
       
       <DragDropContext onDragEnd={this.onDragEnd}>
           <Container>
@@ -99,11 +78,7 @@ class MyDashboard extends Component {
               
           </Container>
       
-      </DragDropContext>
-      <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
-      
-        
-          
+      </DragDropContext>   
       
       </div>
       </ThemeProvider>
@@ -116,4 +91,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, {fetchTasks,editTask,logoutUser})(MyDashboard);
+export default connect(mapStateToProps, {fetchTasks,editTask,logoutUser})(Lists);

@@ -44,7 +44,7 @@ export const CatchPhrase = styled.h4`
   /* border: black solid 2px; */
 `;
 
-export const LoginButton = styled.div`
+export const Button = styled.div`
   grid-column: 6 / 7;
   grid-row: 1 / 2;
   justify-items: right;
