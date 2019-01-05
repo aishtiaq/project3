@@ -47,7 +47,7 @@ class Register extends Component {
             phone: this.state.phone,
             password: this.state.password
         };
-        if (newUser.password === newUser.password2) {
+        if (newUser.password === this.state.password2) {
           console.log(newUser);
           this.props.registerUser(newUser, this.props.history);
           // API.postRegisteredUser(newUser)
