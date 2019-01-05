@@ -5,14 +5,19 @@ import { fetchTasks, editTask } from '../../actions/taskActions'
 import {DragDropContext} from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { HeaderText, HeaderWrapper } from "../Home/HeaderStatic";
+import { HeaderWrapper, HeaderText, CatchPhrase, LogoutButton, Footer } from "./DashboardStyle";
+import { ThemeProvider } from 'styled-components';
+// import { HeaderText, HeaderWrapper } from "../Home/HeaderStatic";
 import { logoutUser } from "../../actions/authActions";
 
 const Container = styled.div`
   display: inline-flex;
   height: 100%;
-
 `;
+
+const theme = {
+  font: "Abel, sans-serif",
+};
 
 class MyDashboard extends Component {
 
@@ -63,13 +68,15 @@ class MyDashboard extends Component {
 
   render() {
     return (
+      <ThemeProvider theme={theme}>
       <div>
+        
       <HeaderWrapper>
-          <HeaderText>Task Master</HeaderText>
-          {/* <LoginButton>Log In/Register</LoginButton> */}
-          {/* <Login></Login> */}
-          <div className="float-right">
-            <button
+          <HeaderText>TASK MASTER
+          <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
+          </HeaderText>
+            <LogoutButton>
+              <button
               to="/register"
               style={{
                 width: "140px",
@@ -81,8 +88,9 @@ class MyDashboard extends Component {
             >
               Logout
             </button>
-          </div>
+            </LogoutButton>
       </HeaderWrapper>
+      
       <DragDropContext onDragEnd={this.onDragEnd}>
           <Container>
               <Column key='column-new' column={{'id':'column-new','title':'New'}} tasks={this.props.tasks} />
@@ -92,11 +100,13 @@ class MyDashboard extends Component {
           </Container>
       
       </DragDropContext>
+      <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
       
         
           
       
       </div>
+      </ThemeProvider>
     );
   }
 }
