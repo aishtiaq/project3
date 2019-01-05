@@ -7,8 +7,8 @@ export default function Modal({ handleClose, show, children }) {
   return (
     <div className={showHideClassName}>
     <section className="modal-main text-center">
-      <p> <strong> {children} </strong> </p>
-      <button onClick={handleClose}>close</button>
+      <div> <strong> {children} </strong> </div>
+      {/* <button onClick={handleClose}>close</button> */}
     </section>
       
     </div>

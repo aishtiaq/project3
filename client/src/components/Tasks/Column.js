@@ -49,6 +49,15 @@ class Column extends React.Component {
       this.showModal();
   }
 
+  onSubmit = () => {
+    let taskName = document.getElementById("taskName").value;
+    let taskDetails = document.getElementById("taskDetails").value;
+    let dueDate = document.getElementById("dueDate").value;
+    console.log(taskName);
+    console.log(taskDetails);
+    console.log(dueDate);
+  }
+
   render() {
     return (
         <Container>
@@ -71,7 +80,28 @@ class Column extends React.Component {
           )}
         </Droppable>
         <Modal show={this.state.show} handleClose={this.hideModal}>
-            {/* add modal details here */}
+            {
+              <form>
+                <div className="form-group">
+                  <label htmlFor="taskName">Task Name:</label>
+                  <input className="form-control" id="taskName" type="text" placeholder="Task Name"></input>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="taskDetails">Task Details:</label>
+                  <textarea className="form-control" id="taskDetails" rows="5" cols="30" placeholder="Task Details"></textarea>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="dueDate">Due Date:</label>
+                  <input id="dueDate" type="date"></input>
+                </div>
+                <div className="btn-group">
+                  <button type="button" className="btn btn-danger" onClick={this.onSubmit}>Submit</button>
+                </div>
+                <div className="btn-group">
+                  <button type="button" className="btn btn-primary" onClick={this.hideModal}>Close</button>
+                </div>
+              </form>
+            }
         </Modal>
       </Container>
     );

@@ -22,7 +22,7 @@ export default class Task extends React.Component {
                 <Container {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                     <h4>{this.props.detail.taskName} </h4>
                     <p>
-                    {this.props.detail.taskDetails} 
+                    {this.props.detail.taskDetails}
                     </p>
                 </Container>
             )}
