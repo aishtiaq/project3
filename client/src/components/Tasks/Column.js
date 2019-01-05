@@ -3,6 +3,8 @@ import Task from './Task';
 import styled from 'styled-components';
 import {Droppable} from 'react-beautiful-dnd';
 import Modal from '../Modal';
+import {fetchTasks, createTask} from '../../actions/taskActions';
+import { connect } from "react-redux";
 
 const Container = styled.div`
   margin: 10px;
@@ -45,12 +47,13 @@ class Column extends React.Component {
   };
 
   hideModal = () => {
-    this.setState({ show: false , msg: ""});
+    this.setState({ show: false });
   };
 
   addTask = id => {
       console.log("+ clicked");
       console.log(id);
+      this.setState({clickedID: id});
       this.showModal();
   }
 
@@ -59,6 +62,14 @@ class Column extends React.Component {
   };
 
   onSubmit = () => {
+    var status = '';
+    if (this.state.clickedID==='column-new') {
+      status = 'New'
+    } else if (this.state.clickedID==='column-ip') {
+      status = 'In Progress'
+    } else if (this.state.clickedID==='column-done') {
+      status = 'Done'
+    }  
     let task = {
       taskName: this.state.taskName,
       taskDetails: this.state.taskDetails,
@@ -66,7 +77,19 @@ class Column extends React.Component {
       status: status
     };
     console.log(task);
+    this.setState({clickedID: "",
+      taskName: "",
+      taskDetails: "",
+      dueDate: ""});
+    this.props.createTask(task);
+    this.hideModal();
+    this.props.fetchTasks();
+  
   };
+
+  editTask = task => {
+    console.log("id is "+task._id);
+  }
 
   render() {
     return (
@@ -78,13 +101,9 @@ class Column extends React.Component {
               {this.props.tasks.tasks.map((task, index) => (
                 task.status === this.props.column.title ?
                 (
-                  <Task key={task._id} detail={task} index={index} />
-                 //console.log(task)
-                
+                  <Task key={task._id} detail={task} index={index} onClick={() => this.editTask(task)} />
                ): (console.log(""))
               ))}
-            
-
               {provided.placeholder}
             </TaskList>
           )}
@@ -97,7 +116,6 @@ class Column extends React.Component {
                   <input 
                     onChange={this.onChange}
                     value={this.state.taskName}
-                    errors={this.errors.taskName}
                     type="text"
                     className="form-control" 
                     id="taskName" type="text" 
@@ -109,7 +127,6 @@ class Column extends React.Component {
                   <textarea 
                     onChange={this.onChange}
                     value={this.state.taskDetails}
-                    errors={this.errors.taskDetails}
                     className="form-control" 
                     id="taskDetails" 
                     rows="5" 
@@ -122,7 +139,6 @@ class Column extends React.Component {
                   <input 
                     onChange={this.onChange}
                     value={this.state.dueDate}
-                    errors={this.errors.dueDate}
                     id="dueDate" 
                     type="date" 
                   />
@@ -141,4 +157,8 @@ class Column extends React.Component {
   }
 }
 
-export default Column;
+const mapStateToProps = state => ({
+  tasks: state.tasks
+});
+
+export default connect(mapStateToProps, {fetchTasks,createTask})(Column);
