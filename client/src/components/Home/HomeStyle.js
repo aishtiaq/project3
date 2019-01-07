@@ -45,7 +45,7 @@ export const CatchPhrase = styled.h4`
 `;
 
 export const Button = styled.div`
-  grid-column: 6 / 7;
+  grid-column: 5 / 7;
   grid-row: 1 / 2;
   justify-items: right;
   display: inline;

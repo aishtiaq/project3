@@ -5,14 +5,13 @@ import { fetchTasks, editTask } from '../../actions/taskActions'
 import {DragDropContext} from 'react-beautiful-dnd';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-//import { HeaderWrapper, HeaderText, CatchPhrase, LogoutButton, Footer } from "./DashboardStyle";
 import { ThemeProvider } from 'styled-components';
-// import { HeaderText, HeaderWrapper } from "../Home/HeaderStatic";
 import { logoutUser } from "../../actions/authActions";
 
 const Container = styled.div`
   display: inline-flex;
   height: 100%;
+  width: 100%;
 `;
 
 const theme = {
@@ -22,8 +21,7 @@ const theme = {
 class Lists extends Component {
 
     componentWillMount() {
-      this.props.fetchTasks();
-      console.log(this.props.tasks);
+      (this.props.whichList === 'team') ? this.props.fetchTasks("team") : this.props.fetchTasks(this.props.whichList);
     }
     
     onDragEnd = result => {
@@ -56,7 +54,7 @@ class Lists extends Component {
                 taskId: draggableId
               }
             this.props.editTask(task);
-            this.props.fetchTasks();
+            (this.props.whichList === 'team') ? this.props.fetchTasks("team") : this.props.fetchTasks(this.props.whichList);
         }
       };
   
@@ -72,9 +70,9 @@ class Lists extends Component {
       
       <DragDropContext onDragEnd={this.onDragEnd}>
           <Container>
-              <Column key='column-new' column={{'id':'column-new','title':'New'}} tasks={this.props.tasks} />
-              <Column key='column-ip' column={{'id':'column-ip','title':'In Progress'}} tasks={this.props.tasks} />
-              <Column key='column-done' column={{'id':'column-done','title':'Done'}} tasks={this.props.tasks} />
+              <Column teamOrUser={this.props.whichList} key='column-new' column={{'id':'column-new','title':'New'}} tasks={this.props.tasks} />
+              <Column teamOrUser={this.props.whichList} key='column-ip' column={{'id':'column-ip','title':'In Progress'}} tasks={this.props.tasks} />
+              <Column teamOrUser={this.props.whichList} key='column-done' column={{'id':'column-done','title':'Done'}} tasks={this.props.tasks} />
               
           </Container>
       

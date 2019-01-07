@@ -20,6 +20,10 @@ const TaskSchema = new Schema({
     type: Date,
     required: false
   },
+  user: {
+    type: Schema.Types.ObjectId,
+    ref: "Users"
+  },
   date: {
     type: Date,
     default: Date.now

@@ -4,7 +4,7 @@ import Lists from "./Lists";
 import "react-tabs/style/react-tabs.css";
 import { ThemeProvider } from 'styled-components';
 import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer } from "../Home/HomeStyle";
-import { logoutUser } from "../../actions/authActions";
+import { setCurrentUser,logoutUser } from "../../actions/authActions";
 import {connect} from 'react-redux';
 
 
@@ -14,6 +14,12 @@ const theme = {
 
 class Dashboard extends Component {
   
+    componentWillMount = () => {
+      console.log("in component mount");
+      console.log(this.props.auth.user.id);
+    }
+
+
     handleLogout = e => {
         e.preventDefault();
         this.props.logoutUser();
@@ -50,10 +56,10 @@ class Dashboard extends Component {
         </TabList>
      
         <TabPanel>
-          <Lists />
+          <Lists whichList={this.props.auth.user.id} />
         </TabPanel>
         <TabPanel>
-          <h2>Any content 2</h2>
+         <Lists whichList="team"/>
         </TabPanel>
       </Tabs>
       <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
@@ -69,4 +75,4 @@ const mapStateToProps = state => ({
     auth: state.auth
   });
 
-export default connect(mapStateToProps, {logoutUser})(Dashboard);
+export default connect(mapStateToProps, {setCurrentUser,logoutUser})(Dashboard);
