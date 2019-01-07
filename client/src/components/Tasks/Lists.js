@@ -71,8 +71,8 @@ class Lists extends Component {
       <DragDropContext onDragEnd={this.onDragEnd}>
           <Container>
               <Column teamOrUser={this.props.whichList} key='column-new' column={{'id':'column-new','title':'New'}} tasks={this.props.tasks} />
-              <Column key='column-ip' column={{'id':'column-ip','title':'In Progress'}} tasks={this.props.tasks} />
-              <Column key='column-done' column={{'id':'column-done','title':'Done'}} tasks={this.props.tasks} />
+              <Column teamOrUser={this.props.whichList} key='column-ip' column={{'id':'column-ip','title':'In Progress'}} tasks={this.props.tasks} />
+              <Column teamOrUser={this.props.whichList} key='column-done' column={{'id':'column-done','title':'Done'}} tasks={this.props.tasks} />
               
           </Container>
       
