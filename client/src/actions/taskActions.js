@@ -2,16 +2,31 @@ import {CREATE_TASK, FETCH_TASKS, UPDATE_TASK} from './types';
 import axios from "axios";
 
 
-export const fetchTasks = () => dispatch => {
-    axios.get("/api/tasks")
-    .then(res => 
-      {
-          dispatch({
-        type: FETCH_TASKS,
-        payload: res.data
-      })
-      }
-    );
+export const fetchTasks = teamOrUser => dispatch => {
+    console.log("team or User is "+teamOrUser);
+    if(teamOrUser === 'team') {
+      axios.get("/api/tasks")
+      .then(res => 
+        {
+            dispatch({
+          type: FETCH_TASKS,
+          payload: res.data
+        })
+        }
+      );
+    } else {
+      console.log("getting my tasks");
+      axios.get("/api/tasks/"+teamOrUser)
+      .then(res => 
+        {
+            dispatch({
+          type: FETCH_TASKS,
+          payload: res.data
+        })
+        }
+      );
+    }
+    
 }
 
 

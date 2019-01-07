@@ -9,7 +9,7 @@ router.route("/")
 // Matches with "/api/books/:id"
 router
   .route("/:id")
-  .get(taskController.findById)
+  .get(taskController.findByUserId)
   .put(taskController.update)
   .delete(taskController.remove);
 

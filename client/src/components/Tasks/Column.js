@@ -74,7 +74,8 @@ class Column extends React.Component {
       taskName: this.state.taskName,
       taskDetails: this.state.taskDetails,
       dueDate: this.state.dueDate,
-      status: status
+      status: status,
+      user: this.props.teamOrUser
     };
     console.log(task);
     this.setState({clickedID: "",
@@ -83,7 +84,7 @@ class Column extends React.Component {
       dueDate: ""});
     this.props.createTask(task);
     this.hideModal();
-    this.props.fetchTasks();
+    this.props.fetchTasks(this.props.teamOrUser);
   
   };
 
