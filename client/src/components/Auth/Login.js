@@ -60,11 +60,11 @@ class Login extends Component {
     return (
         <div className="container">
             <div style={{ marginTop: "4rem" }} className="row">
-              <div className="col s8 offset-s2">
+              <div className="col-md-8 offset-s2">
                 <Link to="/" className="btn-flat waves-effect">
                   Back to home
                 </Link>
-                <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                <div className="col-md-12" style={{ paddingLeft: "11.250px" }}>
                   <h4>
                     <b>Login</b> below
                   </h4>
@@ -73,27 +73,30 @@ class Login extends Component {
                   </p>
                 </div>
                 <form noValidate onSubmit={this.onSubmit}>
-                  <div className="input-field col s12">
+                  <div className="form-group col-md-12">
+                    <label htmlFor="email">Email</label>
                     <input
                       onChange={this.onChange}
                       value={this.state.email}
                       error={errors.email}
+                      className="form-control"
+                      placeholder="test@test.com"
                       id="email"
                       type="email"
                     />
-                    <label htmlFor="email">Email</label>
                   </div>
-                  <div className="input-field col s12">
+                  <div className="form-group col-md-12">
+                    <label htmlFor="password">Password</label>
                     <input
                       onChange={this.onChange}
                       value={this.state.password}
                       error={errors.password}
+                      className="form-control"
                       id="password"
                       type="password"
                     />
-                    <label htmlFor="password">Password</label>
                   </div>
-                  <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                  <div className="col-md-12" style={{ paddingLeft: "11.250px" }}>
                     <button
                       style={{
                         width: "150px",
@@ -102,7 +105,7 @@ class Login extends Component {
                         marginTop: "1rem"
                       }}
                       type="submit"
-                      className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                      className="btn btn-danger waves-effect waves-light"
                     >
                       Login
                     </button>

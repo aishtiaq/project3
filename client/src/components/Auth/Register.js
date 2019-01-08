@@ -65,11 +65,11 @@ class Register extends Component {
         return (
             <div className="container">
               <div className="row">
-                <div className="col s8 offset-s2">
+                <div className="col-md-8 offset-s2">
                   <Link to="/" className="btn-flat waves-effect">
                     Back to home
                   </Link>
-                  <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                  <div className="col-md-12" style={{ paddingLeft: "11.250px" }}>
                     <h4>
                       <b>Register</b> below
                     </h4>
@@ -78,76 +78,89 @@ class Register extends Component {
                     </p>
                   </div>
                   <form noValidate onSubmit={this.onSubmit}>
-                    <div className="input-field col s12">
+                    <div className="form-group col-md-12">
+                      <label htmlFor="firstName">First Name</label>
                       <input
                         onChange={this.onChange}
                         value={this.state.firstName}
                         error={errors.firstName}
+                        className="form-control"
+                        placeholder="First"
                         id="firstName"
                         type="text"
                       />
-                      <label htmlFor="firstName">First Name</label>
                     </div>
-                    <div className="input-field col s12">
+                    <div className="form-group col-md-12">
+                      <label htmlFor="lastName">Last Name</label>
                       <input
                         onChange={this.onChange}
                         value={this.state.lastName}
                         error={errors.lastName}
+                        className="form-control"
+                        placeholder="Last"
                         id="lastName"
                         type="text"
                       />
-                      <label htmlFor="lastName">Last Name</label>
                     </div>
-                    <div className="input-field col s12">
+                    <div className="form-group col-md-12">
+                      <label htmlFor="email">Email</label>
                       <input
                         onChange={this.onChange}
                         value={this.state.email}
                         error={errors.email}
+                        className="form-control"
+                        placeholder="test@test.com"
                         id="email"
                         type="email"
                       />
-                      <label htmlFor="email">Email</label>
                     </div>
-                    <div className="input-field col s12">
+                    <div className="form-group col-md-12">
+                      <label htmlFor="phone">Phone #</label>
                       <input
                         onChange={this.onChange}
                         value={this.state.phone}
                         error={errors.phone}
+                        className="form-control"
+                        placeholder="XXXXXXXXXX"
                         id="phone"
                         type="text"
                       />
-                      <label htmlFor="phone">Phone #</label>
                     </div>
-                    <div className="input-field col s12">
+                    <div className="form-group col-md-12">
+                      <label htmlFor="password">Password</label>
                       <input
                         onChange={this.onChange}
                         value={this.state.password}
                         error={errors.password}
+                        className="form-control"
+                        placeholder="*********"
                         id="password"
                         type="password"
                       />
-                      <label htmlFor="password">Password</label>
                     </div>
-                    <div className="input-field col s12">
+                    <div className="form-group col-md-12">
+                      <label htmlFor="password2">Confirm Password</label>
                       <input
                         onChange={this.onChange}
                         value={this.state.password2}
                         error={errors.password2}
+                        className="form-control"
+                        placeholder="*********"
                         id="password2"
                         type="password"
                       />
-                      <label htmlFor="password2">Confirm Password</label>
                     </div>
-                    <div className="col s12" style={{ paddingLeft: "11.250px" }}>
+                    <div className="col-md-12" style={{ paddingLeft: "11.250px" }}>
                       <button
                         style={{
                           width: "150px",
                           borderRadius: "3px",
                           letterSpacing: "1.5px",
-                          marginTop: "1rem"
+                          marginTop: "1rem",
+                          marginBottom: "1.5rem"
                         }}
                         type="submit"
-                        className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                        className="btn btn-primary waves-effect waves-light"
                       >
                         Sign up
                       </button>
