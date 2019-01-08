@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {Droppable} from 'react-beautiful-dnd';
 import Modal from '../Modal';
 import {fetchTasks, createTask} from '../../actions/taskActions';
+import {fetchUsers} from '../../actions/userActions';
 import { connect } from "react-redux";
 
 const Container = styled.div`
@@ -40,8 +41,16 @@ class Column extends React.Component {
     taskName: "",
     taskDetails: "",
     dueDate: "",
-    errors: {}
+    errors: {},
+    userSelected: ""
   }
+
+  componentDidMount = () => {
+
+    this.props.fetchUsers();
+    
+  }
+
   showModal = () => {
     this.setState({ show: true });
   };
@@ -51,10 +60,9 @@ class Column extends React.Component {
   };
 
   addTask = id => {
-      console.log("+ clicked");
-      console.log(id);
       this.setState({clickedID: id});
       this.showModal();
+      
   }
 
   onChange = e => {
@@ -62,6 +70,7 @@ class Column extends React.Component {
   };
 
   onSubmit = () => {
+    console.log("selected user is "+this.state.userSelected)
     var status = '';
     if (this.state.clickedID==='column-new') {
       status = 'New'
@@ -75,7 +84,7 @@ class Column extends React.Component {
       taskDetails: this.state.taskDetails,
       dueDate: this.state.dueDate,
       status: status,
-      user: this.props.teamOrUser
+      user: this.state.userSelected
     };
     console.log(task);
     this.setState({clickedID: "",
@@ -103,7 +112,7 @@ class Column extends React.Component {
                 task.status === this.props.column.title ?
                 (
                   <Task key={task._id} detail={task} index={index} onClick={() => this.editTask(task)} />
-               ): (console.log(""))
+               ): (<span/>)
               ))}
               {provided.placeholder}
             </TaskList>
@@ -135,6 +144,15 @@ class Column extends React.Component {
                     placeholder="Task Details" 
                   />
                 </div>
+                
+                <div hidden = {this.props.teamOrUser==='team' ? false : true} className="form-group">
+                  <label htmlFor="user">Assign To: </label>
+                    <select className="form-control" id="userSelected" value={this.state.userSelected} onChange={this.onChange}>
+                        {this.props.users.users.map((e, key) => {
+                           return <option  value={e._id}>{e.firstName} {e.lastName}</option>
+                        })}
+                    </select>
+                </div>
                 <div className="form-group">
                   <label htmlFor="dueDate">Due Date:</label>
                   <input 
@@ -142,10 +160,12 @@ class Column extends React.Component {
                     value={this.state.dueDate}
                     id="dueDate" 
                     type="date" 
+                    className="form-control"
                   />
                 </div>
+                
                 <div className="btn-group">
-                  <button type="button" className="btn btn-danger" onClick={this.onSubmit}>Submit</button>
+                  <button type="button" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
                 </div>
                 <div className="btn-group">
                   <button type="button" className="btn btn-primary" onClick={this.hideModal}>Close</button>
@@ -159,7 +179,8 @@ class Column extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  tasks: state.tasks
+  tasks: state.tasks,
+  users: state.users
 });
 
-export default connect(mapStateToProps, {fetchTasks,createTask})(Column);
+export default connect(mapStateToProps, {fetchTasks,createTask,fetchUsers})(Column);

@@ -3,7 +3,6 @@ import axios from "axios";
 
 
 export const fetchTasks = teamOrUser => dispatch => {
-    console.log("team or User is "+teamOrUser);
     if(teamOrUser === 'team') {
       axios.get("/api/tasks")
       .then(res => 
@@ -15,7 +14,6 @@ export const fetchTasks = teamOrUser => dispatch => {
         }
       );
     } else {
-      console.log("getting my tasks");
       axios.get("/api/tasks/"+teamOrUser)
       .then(res => 
         {
