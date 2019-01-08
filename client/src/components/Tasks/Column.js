@@ -90,6 +90,8 @@ class Column extends React.Component {
 
   editTask = task => {
     console.log("id is "+task._id);
+    this.setState({clickedID: task._id});
+    this.showModal();
   }
 
   render() {
