@@ -22,7 +22,7 @@ const TaskSchema = new Schema({
   },
   user: {
     type: Schema.Types.ObjectId,
-    ref: "Users"
+    ref: "users"
   },
   date: {
     type: Date,
@@ -30,4 +30,6 @@ const TaskSchema = new Schema({
   }
 });
 
-module.exports = Tasks = mongoose.model("tasks", TaskSchema);
+var Tasks = mongoose.model("tasks", TaskSchema);
+
+module.exports = Tasks

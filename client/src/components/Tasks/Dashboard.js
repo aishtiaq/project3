@@ -14,11 +14,7 @@ const theme = {
 
 class Dashboard extends Component {
   
-    componentWillMount = () => {
-      console.log("in component mount");
-      console.log(this.props.auth.user.id);
-    }
-
+   
 
     handleLogout = e => {
         e.preventDefault();

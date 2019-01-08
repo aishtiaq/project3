@@ -6,6 +6,7 @@ module.exports = {
   findAll: function(req, res) {
     db.Tasks
       .find(req.query)
+      .populate('user')
       .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));

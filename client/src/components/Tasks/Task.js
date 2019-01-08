@@ -12,7 +12,7 @@ const Container = styled.div`
 
 export default class Task extends React.Component {
    
-   
+
 
   render() {
     return (
@@ -21,9 +21,11 @@ export default class Task extends React.Component {
             {provided => (
                 <Container {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} onClick={this.props.onClick}>
                     <h4>{this.props.detail.taskName} </h4>
-                    <p>
-                    {this.props.detail.taskDetails}
-                    </p>
+                    {this.props.detail.user === undefined ? 
+                        <span></span> :
+                       ( this.props.detail.user.firstName === undefined ?
+                        <span/> :
+                           this.props.detail.user.firstName + " " + this.props.detail.user.lastName ) }
                 </Container>
             )}
         </Draggable> 
