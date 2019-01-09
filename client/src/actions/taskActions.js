@@ -39,6 +39,7 @@ export const createTask = taskData => dispatch => {
 };
 
 export const editTask = taskData => dispatch => {
+  console.log(taskData);
   axios.put("/api/tasks/"+taskData.taskId, taskData )
     .then(res => 
       dispatch({
