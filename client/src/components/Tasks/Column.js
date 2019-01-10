@@ -6,6 +6,7 @@ import Modal from '../Modal';
 import {fetchTasks, createTask, editTask} from '../../actions/taskActions';
 import {fetchUsers} from '../../actions/userActions';
 import { connect } from "react-redux";
+import moment from 'moment';
 
 const Container = styled.div`
   margin: 10px;
@@ -71,8 +72,13 @@ class Column extends React.Component {
   };
 
   onSubmit = () => {
-    console.log("selected user is "+this.state.userSelected)
-    var status = '';
+    var user="";
+    if (this.props.teamOrUser !== 'team') {
+      user = this.props.teamOrUser;
+      console.log("user has been set to "+user);
+    }
+
+    var status;
     if (this.state.clickedID==='column-new') {
       status = 'New'
     } else if (this.state.clickedID==='column-ip') {
@@ -80,49 +86,52 @@ class Column extends React.Component {
     } else if (this.state.clickedID==='column-done') {
       status = 'Done'
     }  
-    if (this.state.action === "add") {
-      let task = {
-        taskName: this.state.taskName,
-        taskDetails: this.state.taskDetails,
-        dueDate: this.state.dueDate,
-        status: status,
-        user: this.state.userSelected
-      };
-      this.props.createTask(task);
 
+    console.log("due date is "+ this.state.dueDate);
+    var task = {
+      taskName: this.state.taskName,
+      taskDetails: this.state.taskDetails,
+      dueDate: this.state.dueDate,
+      status: status,
+    };
+
+    if(user !== "") {
+      task.user = user;
+      console.log("setting user to "+task.user);
+    }
+    if (this.state.action === "add") {
+      this.props.createTask(task);
     } else {
-      let task = {
-        taskName: this.state.taskName,
-        taskDetails: this.state.taskDetails,
-        taskId: this.state.taskID,
-        dueDate: this.state.dueDate,
-        status: status,
-        user: this.state.userSelected
-      };
+
+      task.taskId= this.state.taskID;
+        
       console.log(task);
       this.props.editTask(task);
     }
     
     this.hideModal();
+
     this.setState({clickedID: "",
       taskName: "",
       taskDetails: "",
       taskID: "",
       action: "",
-      dueDate: ""});
+      dueDate: "",
+      userSelected: ""});
 
-    
+    console.log(this.props.teamOrUser);
     this.props.fetchTasks(this.props.teamOrUser);
   
   };
 
-  editTask = task => {
-    console.log("id is "+task._id);
-    this.setState({taskID: task._id,
+  editTask = (task,id) => {
+    this.setState({
+        clickedID: id,
+        taskID: task._id,
         taskName: task.taskName,
         taskDetails: task.taskDetails,
-        dueDate: task.dueDate,
-        userSelected: task.userSelected,
+        dueDate: moment(task.dueDate).format("YYYY-MM-DD"),
+        userSelected: task.user,
         action: "edit"
     });
     this.showModal();
@@ -138,7 +147,7 @@ class Column extends React.Component {
               {this.props.tasks.tasks.map((task, index) => (
                 task.status === this.props.column.title ?
                 (
-                  <Task key={task._id} detail={task} index={index} onClick={() => this.editTask(task)} />
+                  <Task key={task._id} detail={task} index={index} onClick={() => this.editTask(task,this.props.column.id)} />
                ): (<span/>)
               ))}
               {provided.placeholder}
@@ -155,7 +164,7 @@ class Column extends React.Component {
                     value={this.state.taskName}
                     type="text"
                     className="form-control" 
-                    id="taskName" type="text" 
+                    id="taskName" 
                     placeholder="Task Name" 
                   />
                 </div>

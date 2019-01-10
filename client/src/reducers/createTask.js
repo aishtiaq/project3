@@ -14,12 +14,12 @@ export default function (state = initialState , action) {
                 ...state,
                 tasks: action.payload
             }
-        case "CREATE_TASK":
+        case CREATE_TASK:
             return {
                 ...state,
                 task: action.payload
             };
-        case "UPDATE_TASK": 
+        case UPDATE_TASK: 
             return {
                 ...state,
                 task: action.payload
