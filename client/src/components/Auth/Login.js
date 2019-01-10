@@ -3,6 +3,12 @@ import { Link} from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
+import { ThemeProvider } from 'styled-components';
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, RegisterLogin } from "../Home/HomeStyle";
+
+const theme = {
+  font: "Abel, sans-serif",
+};
 
 class Login extends Component {
     constructor() {
@@ -13,7 +19,6 @@ class Login extends Component {
             errors: {}
         };
     }
-
 
     componentDidMount() {
       // If logged in and user navigates to Login page, should redirect them to dashboard
@@ -58,6 +63,15 @@ class Login extends Component {
     render() {
         const { errors } = this.state;
     return (
+      <ThemeProvider theme={theme}>
+      <div>
+      <BodyWrapper>
+      <HeaderWrapper>
+          <HeaderText>TASK MASTER
+          <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
+          </HeaderText>
+          </HeaderWrapper>
+          <RegisterLogin>
         <div className="container">
             <div style={{ marginTop: "4rem" }} className="row">
               <div className="col-md-8 offset-s2">
@@ -113,7 +127,13 @@ class Login extends Component {
                 </form>
               </div>
             </div>
+            </div>
+            </RegisterLogin>
+            <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer>
+            </BodyWrapper>
           </div>
+          </ThemeProvider>
+          
     );
     }
 }

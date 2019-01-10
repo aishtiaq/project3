@@ -3,51 +3,48 @@ import styled from "styled-components";
 export const BodyWrapper = styled.body`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  /* grid-template-rows: repeat(9, minmax(100px, auto)); */
-  grid-template-rows: minmax(150px, auto);
-  grid-auto-flow: row;
+  grid-template-rows: repeat(6, minmax(100px, auto));
   grid-template-areas:
   " headerwrapper headerwrapper headerwrapper headerwrapper headerwrapper headerwrapper"
   " . . logo logo . . "
   " footer footer footer footer footer footer";
-  /* background-color: #2C3531; */
-  background-color: whitesmoke;
-  margin: 0;
-  /* max-width: auto;
-  max-height: auto; */
+  /* background-color: #cccccc; */
+  background-color: #F6F6F6;
+  /* margin: 0; */
+  width: 100%;
+  height: 100%;
+  position: absolute;
 `;
 
 export const HeaderWrapper = styled.div`
-grid-area: headerwrapper;
+  grid-area: headerwrapper;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
   " . headertext headertext headertext button button ";
-  /* grid-template-rows: 1;
-  grid-column: 1 / 13; */
-  /* margin-left: 40px;
-  margin-right: 40px;
-  margin-top: 30px; */
-  /* border-radius: 5px; */
-  background-color: #116466;
+  /* background-color: #116466; */
+  /* background-color: #DACDC5; */
+  /* background-color: #F6F6F6; */
+  background-color: #cccccc;
+  border-bottom: black solid 1px;
+  box-shadow: 0 0 10px;
   @media (max-width: 768px){
   grid-template-areas:
   " headertext headertext headertext headertext headertext headertext "
-  ". button button button button button";
+  " button button button button button button ";
   };
 `;
 
 export const HeaderText = styled.h1`
   font-family: ${props => props.theme.font};
   grid-area: headertext;
-  /* grid-column: 2 / 7;
-  grid-row: 1 / 2; */
-  color: #FFCB9A;
-  background-color: #116466;
+  /* color: #454545; */
+  color: #254c69;
+  /* background-color: #116466; */
+  background-color: #cccccc;
+  letter-spacing: 1px;
   font-size: 45px;
-  font-weight: bold;
-  /* text-align: left; */
-  /* margin-left: 100px; */
+  font-weight: 900px;
   margin-top: 25px;
   @media (max-width: 832px){
   text-align: center;
@@ -58,31 +55,30 @@ export const HeaderText = styled.h1`
 export const CatchPhrase = styled.h4`
 grid-area: catchphrase;
   font-family: 'Varela Round', sans-serif, cursive;
-  /* grid-column: 2 / 7;
-  grid-row: 1 / 2; */
   font-size: 25px;
   text-align: left;
-  color: #D1D8E2;
-  letter-spacing: 3px;
+  /* color: #cccccc; */
+  /* color: #707070; */
+  color: #475843;
+  letter-spacing: 2px;
   margin-top: 10px;
 
   @media (max-width: 832px){
   text-align: center;
 };
-
-  /* border: black solid 2px; */
 `;
 
 export const Button = styled.div`
 grid-area: button;
 margin: 0;
-padding: 0;
-  /* grid-column: 9 / 12;
-  grid-row: 1 / 2; */
-  /* justify-items: right;
-  display: inline; */
-  padding-top: 80px;
-  /* border: black solid 2px; */
+/* padding: 0; */
+padding-top: 80px;
+@media (max-width: 832px){
+  margin: auto;
+  padding-top: 0;
+  padding-bottom: 10px;
+  /* padding-left: 100px; */
+};
 `;
 
 export const AnimateLogo = styled.div`
@@ -102,13 +98,29 @@ export const Footer = styled.div`
   font-family: ${props => props.theme.font};
   grid-area: footer;
   font-size: 20px;
-  color: #2C3531;
+  color: #254c69;
+  font-weight: bold;
   text-align: center;
-  background-color: #D9B08C;
-  /* grid-column: 1 / 7;
-  grid-row: 6 / 7; */
+  background-color: #cccccc;
+  grid-row: 7 / 8;
   padding-top: 20px;
   padding-bottom: 20px;
   line-height: 30px;
-  margin-top: 190px;
+  border-top: black solid 1px;
+  box-shadow: 10px 10px 10px 10px;
 `;
+
+/* Register & Login pages - Body Style to hold the forms */
+
+export const RegisterLogin = styled.div`
+  /* grid-area: registerlogin; */
+  grid-column: 1 / 7;
+  grid-row: 2 / 3;
+`;
+
+/* Dashboard page - Body Style to hold the task lists */
+
+export const DashboardTasks = styled.section`
+  grid-column: 1 / 7;
+  grid-row: 2 / 3;
+`;    
