@@ -3,6 +3,7 @@ import { ThemeProvider } from 'styled-components';
 import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, AnimateLogo } from "./HomeStyle";
 // import { BodyWrapper } from "./HomeBody";
 import { Link } from "react-router-dom";
+import GearsLogo from "./GearsLogo";
 
 const theme = {
     font: "Abel, sans-serif",
@@ -41,8 +42,9 @@ export default () => (
               </Link>
             </Button>
           </HeaderWrapper>
-        <AnimateLogo className="custom-animate">css animate goes here</AnimateLogo>
-        <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
+          <GearsLogo />
+        {/* <AnimateLogo className="custom-animate">css animate goes here</AnimateLogo> */}
+        <Footer>GWBootcamp <br/> ABEER ISHTIAQ ✨ SEAN STUBBS ✨ ATHENA OLSON <br/> Copyright 2019 </Footer> 
       </BodyWrapper>
     </div>
     </ThemeProvider>

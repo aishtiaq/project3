@@ -1,0 +1,79 @@
+#gears-logo {
+    /* height: 600px;
+    width: 700px; */
+    /* border: solid black 2px; */
+    margin-left: 500px;
+  }
+
+  #gear-1 {
+    margin-left: 250px;
+    margin-top: 200px;
+    transform-origin: 125px 125px;                   
+  }
+
+  #gear-2 {
+    margin-left:485px;
+    margin-top: -350px;
+    transform-origin: 100px 100px;
+  }
+
+  #gear-3 {
+    margin-left: 500px;
+    transform-origin: 75px 75px;
+  }
+
+  #gear-4 {
+    margin-left:155px;
+    margin-top: -250px;
+    transform-origin: 50px 50px;
+  }
+
+  #gear-5 {
+    margin-left: 100px;
+    margin-top: 10px;
+    transform-origin: 75px 75px;
+  }
+
+  #gear-6 {
+    margin-left: 200px;
+    margin-top: -15px;
+    transform-origin: 100px 100px;
+  }
+
+  #gear-7 {
+    margin-left: 660px;
+    margin-top: -450px;
+    transform-origin: 125px 125px;
+  }
+
+  #gear-8 {
+    margin-left: 580px;
+    margin-top: -20px;
+    transform-origin: 100px 100px;
+  }
+
+  #gear-9 {
+    margin-left: 420px;
+    margin-top: -190px;
+    /* transform-origin: 75px 75px; */
+  }
+
+  svg {
+    animation: animate 6s linear forwards infinite;
+    -webkit-animation: animate 6s linear forwards infinite;
+    -moz-animation: animate 6s linear forwards infinite;
+    -o-animation: animate 6s linear forwards infinite;
+    animation-play-state: running;
+  }
+
+  @-webkit-keyframes animate {
+    to {
+        transform: rotate(360deg);
+      }
+  }
+
+  @-moz-keyframes animate {
+    to {
+        transform: rotate(360deg);
+      }
+  }

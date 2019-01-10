@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Lists from "./Lists";
 import "react-tabs/style/react-tabs.css";
 import { ThemeProvider } from 'styled-components';
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer } from "../Home/HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, DashboardTasks } from "../Home/HomeStyle";
 import { setCurrentUser,logoutUser } from "../../actions/authActions";
 import {connect} from 'react-redux';
 
@@ -14,18 +14,16 @@ const theme = {
 
 class Dashboard extends Component {
   
-   
-
     handleLogout = e => {
         e.preventDefault();
         this.props.logoutUser();
       };
   
   render() {
-
     return (
         <ThemeProvider theme={theme}>
         <div>
+        <BodyWrapper>
         <HeaderWrapper>
           <HeaderText>TASK MASTER
           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
@@ -45,6 +43,7 @@ class Dashboard extends Component {
             </button>
             </Button>
       </HeaderWrapper>
+      <DashboardTasks>
         <Tabs>
         <TabList>
           <Tab>My Tasks</Tab>
@@ -58,8 +57,9 @@ class Dashboard extends Component {
          <Lists whichList="team"/>
         </TabPanel>
       </Tabs>
+      </DashboardTasks>
       <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
-      
+      </BodyWrapper>
       </div>
       
       </ThemeProvider>

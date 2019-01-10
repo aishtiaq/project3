@@ -3,6 +3,12 @@ import { Link , withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
+import { ThemeProvider } from 'styled-components';
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, RegisterLogin } from "../Home/HomeStyle";
+
+const theme = {
+  font: "Abel, sans-serif",
+};
 
 class Register extends Component {
     constructor() {
@@ -31,7 +37,6 @@ class Register extends Component {
         });
       }
     }
-
     
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -63,6 +68,15 @@ class Register extends Component {
         const { errors } = this.state;
 
         return (
+          <ThemeProvider theme={theme}>
+      <div>
+      <BodyWrapper>
+      <HeaderWrapper>
+          <HeaderText>TASK MASTER
+          <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
+          </HeaderText>
+          </HeaderWrapper>
+          <RegisterLogin>
             <div className="container">
               <div className="row">
                 <div className="col-md-8 offset-s2">
@@ -168,7 +182,13 @@ class Register extends Component {
                   </form>
                 </div>
               </div>
+              
             </div>
+            </RegisterLogin>
+            <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
+            </BodyWrapper>
+          </div>
+          </ThemeProvider>
         );
     };
 };

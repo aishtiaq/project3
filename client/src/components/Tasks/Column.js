@@ -16,6 +16,7 @@ const Container = styled.div`
   flex-direction: column;
   overflow: auto;
   height: 98%;
+  background-color: #eeeeee;
 `;
 
 const Title = styled.div`
