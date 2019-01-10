@@ -7,6 +7,8 @@ export const fetchTasks = teamOrUser => dispatch => {
       axios.get("/api/tasks")
       .then(res => 
         {
+           console.log("")
+          // console.log(res.data);
             dispatch({
           type: FETCH_TASKS,
           payload: res.data
@@ -17,6 +19,7 @@ export const fetchTasks = teamOrUser => dispatch => {
       axios.get("/api/tasks/"+teamOrUser)
       .then(res => 
         {
+          console.log("");
             dispatch({
           type: FETCH_TASKS,
           payload: res.data
@@ -29,6 +32,7 @@ export const fetchTasks = teamOrUser => dispatch => {
 
 
 export const createTask = taskData => dispatch => {
+  console.log(taskData);
   axios.post("/api/tasks", taskData )
     .then(res => 
       dispatch({

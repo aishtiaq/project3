@@ -1,19 +1,24 @@
 const db = require("../models");
+const jwt = require("jsonwebtoken");
+const keys = require("../config/keys");
+const passport = require("passport");
 
 
 // Defining methods for the TaskssController
 module.exports = {
   findAll: function(req, res) {
+    
     db.Tasks
       .find(req.query)
-      .populate('user')
       .sort({ date: -1 })
+      .populate('user')
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
   findByUserId: function(req, res) {
     db.Tasks
       .find({ user: req.params.id})
+      .sort({ date: -1 })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
@@ -26,7 +31,7 @@ module.exports = {
   update: function(req, res) {
     db.Tasks
       .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
+      .then(dbModel => {res.json(dbModel)})
       .catch(err => res.status(422).json(err));
   },
   remove: function(req, res) {

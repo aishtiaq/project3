@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === "production") {
 app.use(passport.initialize());
 
 // Passport config
-require("./config/passport")(passport);
+// require("./config/passport")(passport);
 
 // Add routes, both API and view
 app.use(routes);
