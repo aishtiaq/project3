@@ -6,6 +6,7 @@ import { ThemeProvider } from 'styled-components';
 import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, DashboardTasks } from "../Home/HomeStyle";
 import { setCurrentUser,logoutUser } from "../../actions/authActions";
 import {connect} from 'react-redux';
+import { Link } from "react-router-dom";
 
 
 const theme = {
@@ -28,6 +29,12 @@ class Dashboard extends Component {
           <HeaderText>TASK MASTER
           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
+            <div>
+              Welcome, 
+              <Link to="/updateuser" className="btn-flat waves-effect">
+                    {this.props.auth.user.firstName}
+              </Link>
+            </div>
             <Button>
               <button
               to="/login"

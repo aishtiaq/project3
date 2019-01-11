@@ -9,6 +9,7 @@ import Login from "./components/Auth/Login";
 import PrivateRoute from "./components/PrivateRoute";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
+import User from "./components/Users";
 
 import { setCurrentUser, logoutUser } from "./actions/authActions";
 
@@ -44,6 +45,7 @@ function App() {
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
           <PrivateRoute exact path="/mydashboard" component={Dashboard} />
+          <PrivateRoute exact path="/updateuser" component={User} />
         </Switch>
       </div>
     </Router>
