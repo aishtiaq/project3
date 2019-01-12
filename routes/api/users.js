@@ -7,4 +7,8 @@ router.route("/login").post(userController.loginUser);
 // router.route("/currentUser").post(userController.currentUser);
 router.route("/").get(passport.isAuthenticated,userController.findAll);
 
+// Matches with api/users/id
+router
+  .route("/:id").put(userController.updateUser);
+
 module.exports = router;

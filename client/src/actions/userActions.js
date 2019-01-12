@@ -1,4 +1,4 @@
-import {FETCH_USERS} from './types';
+import {FETCH_USERS, UPDATE_USER} from './types';
 import axios from "axios";
 
 
@@ -13,4 +13,15 @@ export const fetchUsers = () => dispatch => {
                 })
         }
       );
-}
+};
+
+export const editUser = userData => dispatch => {
+  console.log(userData);
+  axios.put("/api/users/"+userData.userId, userData )
+    .then(res => 
+      dispatch({
+        type: UPDATE_USER,
+        payload: res.data
+      })
+    );
+};
