@@ -110,18 +110,22 @@ class Column extends React.Component {
       this.props.editTask(task);
     }
     
-    this.hideModal();
+    if (task.taskName === "" || task.taskDetails === "" || task.dueDate === "") {
+      alert("Must enter Task Name, Task Detail and Due Date");
+    } else {
+      this.hideModal();
 
-    this.setState({clickedID: "",
-      taskName: "",
-      taskDetails: "",
-      taskID: "",
-      action: "",
-      dueDate: "",
-      userSelected: ""});
+      this.setState({clickedID: "",
+        taskName: "",
+        taskDetails: "",
+        taskID: "",
+        action: "",
+        dueDate: "",
+        userSelected: ""});
 
-    console.log(this.props.teamOrUser);
-    this.props.fetchTasks(this.props.teamOrUser);
+      console.log(this.props.teamOrUser);
+      this.props.fetchTasks(this.props.teamOrUser);
+    }
   
   };
 

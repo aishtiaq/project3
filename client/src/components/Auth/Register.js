@@ -52,9 +52,17 @@ class Register extends Component {
             phone: this.state.phone,
             password: this.state.password
         };
-        if (newUser.password === this.state.password2) {
-          console.log(newUser);
-          this.props.registerUser(newUser, this.props.history);
+
+        if (newUser.firstName === "" || newUser.lastName === "" || newUser.phone === "" || newUser.password === "") {
+          alert("Must enter all fields to register user ID");
+        } else if (newUser.password.length < 4) {
+            alert("Password must be 4 characters or more");
+        }
+        else {
+          if (newUser.password === this.state.password2) {
+            console.log(newUser);
+            this.props.registerUser(newUser, this.props.history);
+          };
         };
     };
 
