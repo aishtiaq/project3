@@ -6,7 +6,7 @@ export default function GearsLogo () {
 <div id="gears-logo">
   {/*?xml version="1.0" encoding="utf-8"?*/}
   <div id="gear-1">
-    <svg version="1.1" id="Gr_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px" height="250px" viewBox="0 0 250 250" enableBackground="new 0 0 250 250" xmlSpace="preserve">
+    <svg version="1.1" id="Gr_1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="250px" height="250px" viewBox="0 0 250 250" xmlSpace="preserve">
       <g>
         <path id="gr-path" fillRule="evenodd" clipRule="evenodd" fill="none" stroke="#000000" strokeMiterlimit={10} d="M233.747,124.405
           c0,0.979-0.015,1.956-0.041,2.928c5.77,1.652,11.024,3.226,15.793,4.724c-0.468,7.604-1.629,15.021-3.422,22.193

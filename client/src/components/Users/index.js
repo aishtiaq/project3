@@ -33,7 +33,7 @@ class User extends React.Component {
     }
     componentDidMount() {
         // this.props.setCurrentUser();
-        console.log(this.props.auth.user.firstName);
+        console.log(this.props.auth.user);
         this.setState({
             firstName: this.props.auth.user.firstName,
             lastName: this.props.auth.user.lastName,
@@ -75,7 +75,7 @@ class User extends React.Component {
             <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
             </HeaderText>
             <Button>
-              <button
+              <Link
               to="/mydashboard"
               style={{
                 width: "140px",
@@ -84,11 +84,10 @@ class User extends React.Component {
               }}
               className="btn mx-2 btn-primary"
             >
-              Back to Home
-            </button>
-            </Button>
-            <Button>
-              <button
+              Dashboard
+            </Link>
+            
+              <Link
               to="/login"
               style={{
                 width: "140px",
@@ -99,12 +98,19 @@ class User extends React.Component {
               className="btn mx-2 btn-primary"
             >
               Logout
-            </button>
+            </Link>
             </Button>
             </HeaderWrapper>
             <RegisterLogin>
-                <div style= {{marginLeft: "2rem"}}>
-                    <h1>Update User Credentials</h1>
+            <div className="container">
+            <div style={{ marginTop: "4rem" }} className="row">
+              <div className="col-md-8 offset-s2">
+                
+                <div className="col-md-12" style={{ paddingLeft: "11.250px" }}>
+                
+                    <h4>User Profile</h4>
+                </div>
+                    
                     <form noValidate onSubmit={this.onSubmit}>
                         <div className="form-group col-md-6">
                         <label htmlFor="firstName">First Name</label>
@@ -132,12 +138,12 @@ class User extends React.Component {
                         </div>
                         <div className="form-group col-md-6">
                         <label htmlFor="email">Email</label>
-                        <input
-                            onChange={this.onChange}
+                        <input disabled
+                            // onChange={this.onChange}
                             value={this.state.email}
                             // error={errors.email}
                             className="form-control"
-                            placeholder="test@test.com"
+                            // placeholder="test@test.com"
                             id="email"
                             type="email"
                         />
@@ -195,7 +201,8 @@ class User extends React.Component {
                         </div>
                     </form>
                   </div>
-
+                  </div>
+            </div>
             </RegisterLogin>
             <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
             </BodyWrapper>
