@@ -8,6 +8,7 @@ const Container = styled.div`
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
+  overflow: auto;
   background-color: ${props => props.isDue ? 'red' : 'whitesmoke'};
 `;
 

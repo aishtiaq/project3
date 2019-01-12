@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const BodyWrapper = styled.body`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, minmax(100px, auto));
+  grid-template-rows: auto 1fr auto;
   grid-template-areas:
   " headerwrapper headerwrapper headerwrapper headerwrapper headerwrapper headerwrapper"
   " . . logo logo . . "
@@ -123,4 +123,5 @@ export const RegisterLogin = styled.div`
 export const DashboardTasks = styled.section`
   grid-column: 1 / 7;
   grid-row: 2 / 3;
+  overflow: hidden;
 `;    

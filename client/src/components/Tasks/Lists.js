@@ -10,7 +10,8 @@ import { logoutUser } from "../../actions/authActions";
 
 const Container = styled.div`
   display: inline-flex;
-  height: 100%;
+  height: calc(100vh - 350px);
+
   width: 100%;
 `;
 

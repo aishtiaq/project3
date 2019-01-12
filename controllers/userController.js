@@ -51,7 +51,9 @@ module.exports = {
           const payload = {
             id: user.id,
             firstName: user.firstName,
-            lastName: user.lastName
+            lastName: user.lastName,
+            phone: user.phone,
+            email: user.email
           };
   
           // Sign token

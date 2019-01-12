@@ -29,25 +29,36 @@ class Dashboard extends Component {
           <HeaderText>TASK MASTER
           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
-            <div>
-              Welcome, 
-              <Link to="/updateuser" className="btn-flat waves-effect">
-                    {this.props.auth.user.firstName}
-              </Link>
-            </div>
-            <Button>
+           <Button>
+             Welcome, &nbsp;
+             <Link to="/updateuser" className="btn-flat waves-effect">
+                   {this.props.auth.user.firstName}
+             </Link>
+             
               <button
-              to="/login"
-              style={{
-                width: "140px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
-              onClick={this.handleLogout}
-              className="btn mx-2 btn-primary"
-            >
-              Logout
-            </button>
+                  to="/login"
+                  style={{
+                    width: "140px",
+                    borderRadius: "3px",
+                    letterSpacing: "1.5px"
+                  }}
+                  onClick={this.handleLogout}
+                  className="btn mx-2 btn-primary"
+                >
+                  Logout
+              </button>
+              {/* <Link
+                to="/login"
+                style={{
+                  width: "140px",
+                  borderRadius: "3px",
+                  letterSpacing: "1.5px",
+                }}
+                onClick={this.handleLogout}
+                className="btn mx-2 btn-primary"
+              >
+                Log In
+              </Link> */}
             </Button>
       </HeaderWrapper>
       <DashboardTasks>

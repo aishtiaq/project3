@@ -55,13 +55,7 @@ class Register extends Component {
         if (newUser.password === this.state.password2) {
           console.log(newUser);
           this.props.registerUser(newUser, this.props.history);
-          // API.postRegisteredUser(newUser)
-          //   .then(res => console.log(res.data))
-          //   .catch(err => console.log(err));
-          // } else {
-          //   alert("Please confirm your password matches.")
         };
-        // window.location.replace("/");
     };
 
     render() {
@@ -75,14 +69,25 @@ class Register extends Component {
           <HeaderText>TASK MASTER
           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
-          </HeaderWrapper>
+          <Button>
+              <Link
+              to="/"
+              style={{
+                width: "140px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px"
+              }}
+              className="btn mx-2 btn-primary"
+            >
+              Home
+            </Link>
+          </Button>
+        </HeaderWrapper>
           <RegisterLogin>
             <div className="container">
-              <div className="row">
+              <div className="row my-5">
                 <div className="col-md-8 offset-s2">
-                  <Link to="/" className="btn-flat waves-effect">
-                    Back to home
-                  </Link>
+                  
                   <div className="col-md-12" style={{ paddingLeft: "11.250px" }}>
                     <h4>
                       <b>Register</b> below

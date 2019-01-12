@@ -53,11 +53,6 @@ class Login extends Component {
         console.log(userData);
 
         this.props.loginUser(userData);
-        // API.postUserLogin(userData)
-        //   .then(res => console.log(res.data))
-        //   .catch(err => console.log(err));
-
-        // window.location.replace("/mydashboard");
     };
 
     render() {
@@ -66,18 +61,30 @@ class Login extends Component {
       <ThemeProvider theme={theme}>
       <div>
       <BodyWrapper>
-      <HeaderWrapper>
+        <HeaderWrapper>
           <HeaderText>TASK MASTER
-          <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
+           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
-          </HeaderWrapper>
-          <RegisterLogin>
-        <div className="container">
+          <Button>
+              <Link
+              to="/"
+              style={{
+                width: "140px",
+                borderRadius: "3px",
+                letterSpacing: "1.5px"
+              }}
+              className="btn mx-2 btn-primary"
+            >
+              Home
+            </Link>
+          </Button>
+        </HeaderWrapper>
+          
+        <RegisterLogin>
+         <div className="container">
             <div style={{ marginTop: "4rem" }} className="row">
               <div className="col-md-8 offset-s2">
-                <Link to="/" className="btn-flat waves-effect">
-                  Back to home
-                </Link>
+                
                 <div className="col-md-12" style={{ paddingLeft: "11.250px" }}>
                   <h4>
                     <b>Login</b> below
