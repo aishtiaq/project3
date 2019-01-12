@@ -59,12 +59,20 @@ class User extends React.Component {
             userId: this.state.userId,
             password: this.state.password
         };
-        if (newUser.password === this.state.password2) {
-          console.log(newUser);
-          this.props.editUser(newUser);
-         
-        };
-        // window.location.replace("/");
+
+        if (newUser.firstName === "" || newUser.lastName === "" || newUser.phone === "" || newUser.password === "") {
+            alert("Must enter all fields to update user ID");
+        } else if (newUser.password.length < 4) {
+            alert("Password must be 4 characters or more");
+        }
+        else {
+            if (newUser.password === this.state.password2) {
+            console.log(newUser);
+            this.props.editUser(newUser);
+            
+            };
+            // window.location.replace("/");
+        }
     };
 
     render() {
