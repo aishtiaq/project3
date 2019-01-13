@@ -16,8 +16,8 @@ const Container = styled.div`
   display: inline-flex;
   flex-direction: column;
   overflow: auto;
-  height: 98%;
   background-color: #eeeeee;
+  
 `;
 
 const Title = styled.div`
@@ -99,20 +99,26 @@ class Column extends React.Component {
     if(user !== "") {
       task.user = user;
       console.log("setting user to "+task.user);
-    }
-    if (this.state.action === "add") {
-      this.props.createTask(task);
-    } else {
-
-      task.taskId= this.state.taskID;
-        
-      console.log(task);
-      this.props.editTask(task);
+    } else if(this.state.userSelected!=="") {
+      console.log("selected user is: " + this.state.userSelected);
+      task.user = this.state.userSelected;
     }
     
-    if (task.taskName === "" || task.taskDetails === "" || task.dueDate === "") {
-      alert("Must enter Task Name, Task Detail and Due Date");
+    
+    if (task.taskName === "" || task.taskDetails === "" ) {
+      alert("Must enter Task Name and Task Detail" );
     } else {
+
+      if (this.state.action === "add") {
+        
+        this.props.createTask(task);
+      } else {
+  
+        task.taskId= this.state.taskID;
+          
+        console.log(task);
+        this.props.editTask(task);
+      }
       this.hideModal();
 
       this.setState({clickedID: "",
@@ -130,16 +136,30 @@ class Column extends React.Component {
   };
 
   editTask = (task,id) => {
+    console.log(task);
+    // console.log(task.user._id);
     this.setState({
         clickedID: id,
         taskID: task._id,
         taskName: task.taskName,
         taskDetails: task.taskDetails,
-        dueDate: moment(task.dueDate).format("YYYY-MM-DD"),
-        userSelected: task.user,
+        dueDate: task.dueDate ? moment(task.dueDate).format("YYYY-MM-DD") : "",
+        userSelected: task.user===undefined ? "" :task.user._id,
         action: "edit"
     });
     this.showModal();
+  }
+
+  onClose = () => {
+    this.setState({
+        clickedID: "",
+        taskName: "",
+        taskDetails: "",
+        taskID: "",
+        action: "",
+        dueDate: "",
+        userSelected: ""});
+    this.hideModal();
   }
 
   render() {
@@ -189,8 +209,9 @@ class Column extends React.Component {
                 <div hidden = {this.props.teamOrUser==='team' ? false : true} className="form-group">
                   <label htmlFor="user">Assign To: </label>
                     <select className="form-control" id="userSelected" value={this.state.userSelected} onChange={this.onChange}>
+                        <option value="" selected disabled hidden>Select User...</option>
                         {this.props.users.users.map((e, key) => {
-                           return <option  value={e._id}>{e.firstName} {e.lastName}</option>
+                           return <option  value={e._id} >{e.firstName} {e.lastName} </option>
                         })}
                     </select>
                 </div>
@@ -209,7 +230,7 @@ class Column extends React.Component {
                   <button type="button" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
                 </div>
                 <div className="btn-group">
-                  <button type="button" className="btn btn-primary" onClick={this.hideModal}>Close</button>
+                  <button type="button" className="btn btn-primary" onClick={this.onClose}>Close</button>
                 </div>
               </form>
             }

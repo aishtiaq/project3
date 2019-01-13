@@ -13,6 +13,10 @@ const theme = {
     font: "Abel, sans-serif",
   };
 
+  const dStyle = {
+    flex: '1'
+  }
+
 class Dashboard extends Component {
   
     handleLogout = e => {
@@ -61,7 +65,7 @@ class Dashboard extends Component {
               </Link> */}
             </Button>
       </HeaderWrapper>
-      <DashboardTasks>
+      <DashboardTasks style={dStyle}>
         <Tabs>
         <TabList>
           <Tab>My Tasks</Tab>
