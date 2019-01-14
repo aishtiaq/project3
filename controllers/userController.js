@@ -2,7 +2,8 @@ const db = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../config/keys");
-const passport = require("passport");
+const nodemailer = require('nodemailer');
+require('dotenv').config();
 
 // Defining methods for the booksController
 module.exports = {
@@ -25,7 +26,40 @@ module.exports = {
               if (err) throw err;
               newUser.password = hash;
               db.Users.create(newUser)
-                .then(user => res.json(user))
+                .then(user => {
+                  res.json(user);
+                  const transporter = nodemailer.createTransport({
+                    service: 'gmail',
+                    auth: {
+                      user: `${process.env.EMAIL_ADD}`,
+                      pass: `${process.env.EMAIL_PASS}`
+                    },
+                  });
+          
+                  const mailOptions = {
+                    from: `gwtaskmaster@gmail.com`,
+                    to: `${user.email}`,
+                    subject: `Welcome to Task Master`,
+                    text:
+                      `Welcome to the application!`+
+                      `\n\n Click https://gwtaskmaster.herokuapp.com `+
+                `to access the application.`
+                  };
+          
+                  console.log('sending mail');
+          
+                  transporter.sendMail(mailOptions, function(err, response) {
+                    if (err) {
+                      console.error('there was an error: ', err);
+                    } else {
+                      console.log('here is the res: ', response);
+                      res.status(200).json('recovery email sent');
+                    }
+                  });
+                
+                
+                
+                })
                 .catch(err => console.log(err));
             });
           });

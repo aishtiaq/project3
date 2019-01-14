@@ -46,7 +46,8 @@ class Column extends React.Component {
     action: "",
     dueDate: "",
     errors: {},
-    userSelected: ""
+    userSelected: "",
+    selfOrAssigned: ""
   }
 
   componentDidMount = () => {
@@ -74,9 +75,14 @@ class Column extends React.Component {
 
   onSubmit = () => {
     var user="";
+    var isAssigned=""
     if (this.props.teamOrUser !== 'team') {
+      isAssigned='self';
       user = this.props.teamOrUser;
-      console.log("user has been set to "+user);
+      console.log("self or assigned is ");
+    } else {
+      isAssigned= 'assigned';
+      console.log("self or assigned is "+isAssigned);
     }
 
     var status;
@@ -94,6 +100,7 @@ class Column extends React.Component {
       taskDetails: this.state.taskDetails,
       dueDate: this.state.dueDate,
       status: status,
+      selfOrAssigned: isAssigned
     };
 
     if(user !== "") {
@@ -110,7 +117,7 @@ class Column extends React.Component {
     } else {
 
       if (this.state.action === "add") {
-        
+        console.log(task);
         this.props.createTask(task);
       } else {
   
@@ -127,7 +134,8 @@ class Column extends React.Component {
         taskID: "",
         action: "",
         dueDate: "",
-        userSelected: ""});
+        userSelected: "",
+      selfOrAssigned: ""});
 
       console.log(this.props.teamOrUser);
       this.props.fetchTasks(this.props.teamOrUser);
