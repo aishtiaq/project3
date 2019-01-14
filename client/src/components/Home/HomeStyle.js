@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const BodyWrapper = styled.body`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
+  
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
   " headerwrapper headerwrapper headerwrapper headerwrapper headerwrapper headerwrapper"
@@ -21,7 +22,7 @@ export const HeaderWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
-  " headertext headertext headertext headertext . button ";
+  " headertext headertext headertext headertext button button ";
   /* background-color: #116466; */
   /* background-color: #DACDC5; */
   /* background-color: #F6F6F6; */
@@ -74,10 +75,13 @@ grid-area: button;
 margin: 0;
 /* padding: 0; */
 padding-top: 80px;
+padding-right: 100px;
+text-align: right;
 @media (max-width: 832px){
   margin: auto;
   padding-top: 0;
   padding-bottom: 10px;
+  text-align: center;
   /* padding-left: 100px; */
 };
 `;
@@ -117,7 +121,7 @@ export const RegisterLogin = styled.div`
   /* grid-area: registerlogin; */
   grid-column: 3 / 6;
   grid-row: 2 / 4;
-
+  overflow: scroll;
   @media (max-width: 832px){
     grid-column: 1 / 7;
     grid-row: 2 / 4;
@@ -132,4 +136,9 @@ export const DashboardTasks = styled.section`
   grid-column: 1 / 7;
   grid-row: 2 / 3;
   overflow: hidden;
+  @media (max-width: 832px){
+    grid-column: 1 / 7;
+    grid-row: 2 / 4;
+    overflow: scroll;
+  };
 `;    
