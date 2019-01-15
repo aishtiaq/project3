@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Lists from "./Lists";
 import "react-tabs/style/react-tabs.css";
 import { ThemeProvider } from 'styled-components';
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, DashboardTasks } from "../Home/HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, DashboardTasks, TabStyle, WelcomeMessage } from "../Home/HomeStyle";
 import { setCurrentUser,logoutUser } from "../../actions/authActions";
 import {connect} from 'react-redux';
 import { Link } from "react-router-dom";
@@ -34,11 +34,11 @@ class Dashboard extends Component {
           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
            <Button>
+             <WelcomeMessage>
              Welcome, &nbsp;
              <Link to="/updateuser" className="btn-flat waves-effect">
                    {this.props.auth.user.firstName}
              </Link>
-             
               <button
                   to="/login"
                   style={{
@@ -51,6 +51,7 @@ class Dashboard extends Component {
                 >
                   Logout
               </button>
+              </WelcomeMessage>
               {/* <Link
                 to="/login"
                 style={{
@@ -65,13 +66,16 @@ class Dashboard extends Component {
               </Link> */}
             </Button>
       </HeaderWrapper>
+      
       <DashboardTasks style={dStyle}>
         <Tabs>
         <TabList>
+          <TabStyle>
           <Tab>My Tasks</Tab>
+          
           <Tab>Team Tasks</Tab>
+          </TabStyle>
         </TabList>
-     
         <TabPanel>
           <Lists whichList={this.props.auth.user.id} />
         </TabPanel>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const BodyWrapper = styled.body`
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  
   grid-template-rows: auto 1fr auto;
   grid-template-areas:
   " headerwrapper headerwrapper headerwrapper headerwrapper headerwrapper headerwrapper"
@@ -11,6 +10,7 @@ export const BodyWrapper = styled.body`
   " footer footer footer footer footer footer";
   /* background-color: #cccccc; */
   background-color: #F6F6F6;
+  /* background-color: #eaeaea; */
   /* margin: 0; */
   width: 100%;
   height: 100%;
@@ -23,16 +23,13 @@ export const HeaderWrapper = styled.div`
   grid-template-columns: repeat(6, 1fr);
   grid-template-areas:
   " headertext headertext headertext headertext button button ";
-  /* background-color: #116466; */
-  /* background-color: #DACDC5; */
-  /* background-color: #F6F6F6; */
-  background-color: #cccccc;
+  background-color: #eaeaea;
   border-bottom: black solid 1px;
-  box-shadow: 0 0 10px;
+  box-shadow: 0 0 10px #33363b;
   @media (max-width: 768px){
   grid-template-areas:
   " headertext headertext headertext headertext headertext headertext "
-  " button button button button button button ";
+  " . . button button button button ";
   };
 `;
 
@@ -40,9 +37,10 @@ export const HeaderText = styled.h1`
   font-family: ${props => props.theme.font};
   grid-area: headertext;
   /* color: #454545; */
-  color: #254c69;
+  color: #33363b;
   /* background-color: #116466; */
-  background-color: #cccccc;
+  /* background-color: #cccccc; */
+  /* background-color: red; */
   letter-spacing: 1px;
   font-size: 45px;
   font-weight: 900px;
@@ -59,9 +57,7 @@ grid-area: catchphrase;
   font-family: 'Varela Round', sans-serif, cursive;
   font-size: 25px;
   text-align: left;
-  /* color: #cccccc; */
-  /* color: #707070; */
-  color: #475843;
+  color: #7A9D96;
   letter-spacing: 2px;
   margin-top: 10px;
 
@@ -81,8 +77,7 @@ text-align: right;
   margin: auto;
   padding-top: 0;
   padding-bottom: 10px;
-  text-align: center;
-  /* padding-left: 100px; */
+  margin-left: -15px;
 };
 `;
 
@@ -103,25 +98,24 @@ export const Footer = styled.div`
   font-family: ${props => props.theme.font};
   grid-area: footer;
   font-size: 20px;
-  color: #254c69;
-  font-weight: bold;
+  color: #7A9D96;
   text-align: center;
-  background-color: #cccccc;
+  background-color: #33363b;
   grid-row: 7 / 8;
   padding-top: 20px;
   padding-bottom: 20px;
   line-height: 30px;
   border-top: black solid 1px;
-  box-shadow: 0 -5px 5px -5px #333;
+  box-shadow: 0 -8px 5px -5px #7A9D96;
 `;
 
 /* Register & Login pages - Body Style to hold the forms */
 
 export const RegisterLogin = styled.div`
-  /* grid-area: registerlogin; */
+  grid-area: registerlogin;
   grid-column: 3 / 6;
   grid-row: 2 / 4;
-  overflow: scroll;
+  /* overflow: scroll; */
   @media (max-width: 832px){
     grid-column: 1 / 7;
     grid-row: 2 / 4;
@@ -136,9 +130,26 @@ export const DashboardTasks = styled.section`
   grid-column: 1 / 7;
   grid-row: 2 / 3;
   overflow: hidden;
+  color: #254c69;
+  background-color: white;
+  margin-top: 10px;
   @media (max-width: 832px){
     grid-column: 1 / 7;
     grid-row: 2 / 4;
     overflow: scroll;
   };
 `;    
+
+// Styles tabs on Dashboard w/ font & color (TABS ONLY)
+export const TabStyle = styled.div`
+  color: yellowgreen;
+  /* color: white; */
+  background-color: #33363b;
+  /* background-color: white; */
+  font-family: 'Varela Round', sans-serif, cursive;
+  font-size: 20px;
+`;  
+
+export const WelcomeMessage = styled.div`
+  color: #33363b;
+  `;
