@@ -16,12 +16,15 @@ const Container = styled.div`
   display: inline-flex;
   flex-direction: column;
   overflow: auto;
-  background-color: #eeeeee;
+  background-color: #edf0f4;
   
 `;
 
 const Title = styled.div`
   padding: 10px;
+  color: #254c69;
+  font-weight: 800px;
+  font-size: 20px;
 `;
 
 const FloatRight = styled.div`
@@ -229,7 +232,7 @@ class Column extends React.Component {
                 <div className="btn-group">
                   <button type="button" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
                 </div>
-                <div className="btn-group">
+                <div className="btn-group ml-2">
                   <button type="button" className="btn btn-primary" onClick={this.onClose}>Close</button>
                 </div>
               </form>
