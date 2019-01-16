@@ -9,6 +9,6 @@ router.route("/").get(passport.isAuthenticated,userController.findAll);
 
 // Matches with api/users/id
 router
-  .route("/:id").put(userController.updateUser);
+  .route("/:id").put(passport.isAuthenticated,userController.updateUser);
 
 module.exports = router;
