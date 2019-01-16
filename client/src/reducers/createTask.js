@@ -1,4 +1,4 @@
-import {CREATE_TASK, FETCH_TASKS, UPDATE_TASK} from '../actions/types';
+import {CREATE_TASK, FETCH_TASKS, UPDATE_TASK, DELETE_TASK} from '../actions/types';
 
 
 const initialState = {
@@ -20,6 +20,11 @@ export default function (state = initialState , action) {
                 task: action.payload
             };
         case UPDATE_TASK: 
+            return {
+                ...state,
+                task: action.payload
+            };
+        case DELETE_TASK: 
             return {
                 ...state,
                 task: action.payload

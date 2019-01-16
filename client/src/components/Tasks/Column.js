@@ -3,7 +3,7 @@ import Task from './Task';
 import styled from 'styled-components';
 import {Droppable} from 'react-beautiful-dnd';
 import Modal from '../Modal';
-import {fetchTasks, createTask, editTask} from '../../actions/taskActions';
+import {fetchTasks, createTask, editTask, deleteTask} from '../../actions/taskActions';
 import {fetchUsers} from '../../actions/userActions';
 import { connect } from "react-redux";
 import moment from 'moment';
@@ -147,8 +147,6 @@ class Column extends React.Component {
   };
 
   editTask = (task,id) => {
-    console.log(task);
-    // console.log(task.user._id);
     this.setState({
         clickedID: id,
         taskID: task._id,
@@ -160,6 +158,14 @@ class Column extends React.Component {
     });
     this.showModal();
   }
+
+  deleteTask = (id) => {
+    console.log("in delete task" +id);
+    this.props.deleteTask(id);
+    console.log(this.props.teamOrUser);
+    this.props.fetchTasks(this.props.teamOrUser);
+  }
+
 
   onClose = () => {
     this.setState({
@@ -183,7 +189,7 @@ class Column extends React.Component {
               {this.props.tasks.tasks.map((task, index) => (
                 task.status === this.props.column.title ?
                 (
-                  <Task column={this.props.column.title} key={task._id} detail={task} index={index} onClick={() => this.editTask(task,this.props.column.id)} />
+                  <Task column={this.props.column.title} key={task._id} detail={task} index={index} onClick={() => this.editTask(task,this.props.column.id)} onDelete={() => this.deleteTask(task._id)}/>
                ): (<span/>)
               ))}
               {provided.placeholder}
@@ -257,4 +263,4 @@ const mapStateToProps = state => ({
   task: state.task
 });
 
-export default connect(mapStateToProps, {fetchTasks,createTask,fetchUsers, editTask})(Column);
+export default connect(mapStateToProps, {fetchTasks,createTask,fetchUsers, editTask, deleteTask})(Column);
