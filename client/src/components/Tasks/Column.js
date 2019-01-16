@@ -183,7 +183,7 @@ class Column extends React.Component {
               {this.props.tasks.tasks.map((task, index) => (
                 task.status === this.props.column.title ?
                 (
-                  <Task key={task._id} detail={task} index={index} onClick={() => this.editTask(task,this.props.column.id)} />
+                  <Task column={this.props.column.title} key={task._id} detail={task} index={index} onClick={() => this.editTask(task,this.props.column.id)} />
                ): (<span/>)
               ))}
               {provided.placeholder}

@@ -51,12 +51,14 @@ class Lists extends Component {
             } else if (destination.droppableId==='column-ip') {
               status = 'In Progress'
             } else if (destination.droppableId==='column-done') {
-              status = 'Done'
+              status = 'Done';
             }  
             var task = {
                 status: status,
-                taskId: draggableId
+                taskId: draggableId,
+                completeDate: status === 'Done' ? new Date() : null
               }
+            console.log(task);
             this.props.editTask(task);
             (this.props.whichList === 'team') ? this.props.fetchTasks("team") : this.props.fetchTasks(this.props.whichList);
         }
