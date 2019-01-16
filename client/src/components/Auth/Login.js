@@ -126,7 +126,7 @@ class Login extends Component {
                         marginTop: "1rem"
                       }}
                       type="submit"
-                      className="btn btn-danger waves-effect waves-light"
+                      className="btn btn-primary waves-effect waves-light"
                     >
                       Login
                     </button>
