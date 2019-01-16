@@ -12,9 +12,6 @@ const Container = styled.div`
   background-color: ${props => props.isDue ? 'red' : 'whitesmoke'};
 `;
 
-const red = {
-    backgroundColor: 'red'
-}
 
 export default class Task extends React.Component {
    
@@ -23,10 +20,14 @@ export default class Task extends React.Component {
   render() {
     var now = moment();
     var isDue;
-    if(now.isAfter(this.props.detail.dueDate) ) {
-        isDue=true;
-    } else  
+    if(this.props.column !== 'Done')
+        if(now.isAfter(this.props.detail.dueDate) ) 
+            isDue=true;
+        else
+            isDue=false;
+    else    
         isDue=false;
+        
             
     return (
         
