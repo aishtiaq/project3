@@ -112,18 +112,6 @@ module.exports = {
       });
     });
   },
-  // currentUser: function(req,res) {
-  //   passport.authenticate("jwt", { session: false }),
-  //       (req, res) => {
-  //       res.json({
-  //           id: req.user.id,
-  //           firstName: req.user.firstName,
-  //           lastName: req.user.lastName,
-  //           email: req.user.email,
-  //           phone: req.body.phone
-  //       });
-  //       }
-  // },
   findAll: function(req, res) {
     // passport.authenticate("jwt", {session: false})
     db.Users

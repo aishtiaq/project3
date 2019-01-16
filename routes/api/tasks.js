@@ -1,16 +1,16 @@
 const router = require("express").Router();
 const taskController = require("../../controllers/taskController");
-
+const passport = require("../../config/passport");
 
 router.route("/")
-  .get(taskController.findAll)
-  .post(taskController.create);
+  .get(passport.isAuthenticated,taskController.findAll)
+  .post(passport.isAuthenticated,taskController.create);
 
 // Matches with "/api/books/:id"
 router
   .route("/:id")
-  .get(taskController.findByUserId)
-  .put(taskController.update)
-  .delete(taskController.remove);
+  .get(passport.isAuthenticated,taskController.findByUserId)
+  .put(passport.isAuthenticated,taskController.update)
+  .delete(passport.isAuthenticated,taskController.remove);
 
 module.exports = router;
