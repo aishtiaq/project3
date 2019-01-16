@@ -13,9 +13,17 @@ const Container = styled.div`
   color: ${props => props.isDue ? 'whitesmoke' : '#33363b;'};
 `;
 
+const FloatRight = styled.div`
+   float: right;
+   cursor: pointer;
+`; 
 
 export default class Task extends React.Component {
    
+  handleOnClick = (e) => {
+    e.stopPropagation();
+    this.props.onDelete();
+  }
 
 
   render() {
@@ -35,7 +43,12 @@ export default class Task extends React.Component {
         <Draggable draggableId={this.props.detail._id} index={this.props.index}>
             {provided => (
                 <Container isDue={isDue} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} onClick={this.props.onClick}>
-                    <h4>{this.props.detail.taskName} </h4>
+                    <h4>{this.props.detail.taskName} 
+                    <FloatRight>
+                    <i onClick={this.handleOnClick}  className="fas fa-times"></i>
+                    </FloatRight>
+                    </h4>
+                    
                     {this.props.detail.user === undefined ? 
                         <span></span> :
                        ( this.props.detail.user.firstName === undefined ?

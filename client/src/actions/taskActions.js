@@ -1,4 +1,4 @@
-import {CREATE_TASK, FETCH_TASKS, UPDATE_TASK} from './types';
+import {CREATE_TASK, FETCH_TASKS, UPDATE_TASK, DELETE_TASK} from './types';
 import axios from "axios";
 
 
@@ -43,11 +43,21 @@ export const createTask = taskData => dispatch => {
 };
 
 export const editTask = taskData => dispatch => {
-  console.log(taskData);
   axios.put("/api/tasks/"+taskData.taskId, taskData )
     .then(res => 
       dispatch({
         type: UPDATE_TASK,
+        payload: res.data
+      })
+    );
+};
+
+export const deleteTask = taskId => dispatch => {
+  console.log(taskId);
+  axios.delete("/api/tasks/"+taskId)
+    .then(res => 
+      dispatch({
+        type: DELETE_TASK,
         payload: res.data
       })
     );
