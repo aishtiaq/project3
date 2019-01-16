@@ -115,7 +115,7 @@ export const RegisterLogin = styled.div`
   grid-area: registerlogin;
   grid-column: 3 / 6;
   grid-row: 2 / 4;
-  /* overflow: scroll; */
+  overflow: auto;
   @media (max-width: 832px){
     grid-column: 1 / 7;
     grid-row: 2 / 4;
@@ -152,4 +152,6 @@ export const TabStyle = styled.div`
 
 export const WelcomeMessage = styled.div`
   color: #33363b;
+  font-size: 25px;
+  font-family: 'Varela Round', sans-serif, cursive;
   `;

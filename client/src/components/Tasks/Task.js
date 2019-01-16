@@ -9,7 +9,7 @@ const Container = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   overflow: auto;
-  background-color: ${props => props.isDue ? '#cc1302' : 'whitesmoke'};
+  background-color: ${props => props.isDue ? '#a82828' : 'whitesmoke'};
   color: ${props => props.isDue ? 'whitesmoke' : '#33363b;'};
 `;
 
@@ -54,12 +54,11 @@ export default class Task extends React.Component {
                        ( this.props.detail.user.firstName === undefined ?
                         <span/> :
                            this.props.detail.user.firstName + " " + this.props.detail.user.lastName ) }
-
-                           {this.props.detail.dueDate === undefined ? 
-                        <span></span> :
-                       ( this.props.detail.dueDate === undefined ?
+                            <span className="float-right">
+                       { this.props.detail.dueDate === undefined ?
                         <span/> :
-                           "Due Date: " + this.props.detail.dueDate ) }
+                        "Due: " +  moment(this.props.detail.dueDate).format("M-DD-YYYY") }
+                        </span>    
                 </Container>
             )}
         </Draggable> 
