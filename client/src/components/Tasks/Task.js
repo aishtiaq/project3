@@ -9,8 +9,8 @@ const Container = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   overflow: auto;
-  background-color: ${props => props.isDue ? '#a82828' : 'whitesmoke'};
-  color: ${props => props.isDue ? 'whitesmoke' : '#33363b'};
+  background-color: ${props => props.isDue ===1 ? '#a82828' : props.isDue ===2 ? 'yellow': 'whitesmoke'};
+  color: ${props => props.isDue ===1 ? 'whitesmoke' : '#33363b;'};
 `;
 
 const FlexDiv = styled.div`
@@ -35,12 +35,16 @@ export default class Task extends React.Component {
     var now = moment();
     var isDue;
     if(this.props.column !== 'Done')
-        if(now.isAfter(this.props.detail.dueDate) ) 
-            isDue=true;
-        else
-            isDue=false;
+        if(now.zone(-5).isAfter(this.props.detail.dueDate) ) 
+            isDue=1;
+        else if (moment(this.props.detail.dueDate).zone(-5).subtract(2,"days").format("MM-DD-YYYY") === moment().format("MM-DD-YYYY")) {
+            console.log(this.props.detail.taskName);
+            console.log(moment().format("MM-DD-YYYY")+ " date diff is: "+moment(this.props.detail.dueDate).zone(-5).subtract(2,"days").format("MM-DD-YYYY"));
+            isDue=2;
+        }
+            
     else    
-        isDue=false;
+        isDue=0;
         
             
     return (
@@ -60,9 +64,9 @@ export default class Task extends React.Component {
                         <span/> :
                            this.props.detail.user.firstName + " " + this.props.detail.user.lastName ) }
                             <span className="float-right">
-                       { this.props.detail.dueDate === undefined ?
+                       { this.props.detail.dueDate === null ?
                         <span/> :
-                        "Due: " +  moment(this.props.detail.dueDate).format("M-DD-YYYY") }
+                        "Due: " +  moment(this.props.detail.dueDate).zone(-5).format("M-DD-YYYY") }
                         </span>    
                 </Container>
             )}
