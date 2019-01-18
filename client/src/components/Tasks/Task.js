@@ -37,7 +37,7 @@ export default class Task extends React.Component {
     if(this.props.column !== 'Done')
         if(now.zone(-5).isAfter(this.props.detail.dueDate) ) 
             isDue=1;
-        else if (moment(this.props.detail.dueDate).zone(-5).subtract(2,"days").format("MM-DD-YYYY") == moment().format("MM-DD-YYYY")) {
+        else if (moment(this.props.detail.dueDate).zone(-5).subtract(2,"days").format("MM-DD-YYYY") === moment().format("MM-DD-YYYY")) {
             console.log(this.props.detail.taskName);
             console.log(moment().format("MM-DD-YYYY")+ " date diff is: "+moment(this.props.detail.dueDate).zone(-5).subtract(2,"days").format("MM-DD-YYYY"));
             isDue=2;
