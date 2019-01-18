@@ -62,7 +62,7 @@ class Login extends Component {
       <div>
       <BodyWrapper>
         <HeaderWrapper>
-          <HeaderText>TASK MASTER
+          <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm"></i>
            <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
           <Button>
@@ -136,7 +136,7 @@ class Login extends Component {
             </div>
             </div>
             </RegisterLogin>
-            <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer>
+            <Footer>GWBootcamp <br/> ABEER ISHTIAQ ✨ SEAN STUBBS ✨ ATHENA OLSON <br/> Copyright© 2019 </Footer>
             </BodyWrapper>
           </div>
           </ThemeProvider>

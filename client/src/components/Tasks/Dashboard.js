@@ -7,16 +7,17 @@ import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, Da
 import { setCurrentUser,logoutUser } from "../../actions/authActions";
 import {connect} from 'react-redux';
 import { Link } from "react-router-dom";
+import styled from 'styled-components';
 
 
 const theme = {
     font: "Abel, sans-serif",
   };
 
-  const dStyle = {
-    flex: '1'
-  }
-
+const dStyle = {
+  flex: '1'
+}
+  
 class Dashboard extends Component {
   
     handleLogout = e => {
@@ -30,7 +31,7 @@ class Dashboard extends Component {
         <div>
         <BodyWrapper>
         <HeaderWrapper>
-          <HeaderText>TASK MASTER
+          <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm"></i>
           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
            <Button>
@@ -84,7 +85,7 @@ class Dashboard extends Component {
         </TabPanel>
       </Tabs>
       </DashboardTasks>
-      <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
+      <Footer>GWBootcamp <br/> ABEER ISHTIAQ ✨ SEAN STUBBS ✨ ATHENA OLSON <br/> Copyright© 2019 </Footer> 
       </BodyWrapper>
       </div>
       

@@ -10,13 +10,18 @@ const Container = styled.div`
   margin-bottom: 10px;
   overflow: auto;
   background-color: ${props => props.isDue ? '#a82828' : 'whitesmoke'};
-  color: ${props => props.isDue ? 'whitesmoke' : '#33363b;'};
+  color: ${props => props.isDue ? 'whitesmoke' : '#33363b'};
 `;
 
-const FloatRight = styled.div`
-   float: right;
+const FlexDiv = styled.div`
+   display: flex;
    cursor: pointer;
+   justify-content: space-between;
 `; 
+
+const StyledH4 = styled.h4`
+    margin-right: 15px;
+`;    
 
 export default class Task extends React.Component {
    
@@ -43,12 +48,12 @@ export default class Task extends React.Component {
         <Draggable draggableId={this.props.detail._id} index={this.props.index}>
             {provided => (
                 <Container isDue={isDue} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef} onClick={this.props.onClick}>
-                    <h4>{this.props.detail.taskName} 
-                    <FloatRight>
-                    <i onClick={this.handleOnClick}  className="fas fa-times"></i>
-                    </FloatRight>
-                    </h4>
-                    
+                    <FlexDiv>
+                        <StyledH4>
+                            {this.props.detail.taskName} 
+                        </StyledH4>
+                        <i onClick={this.handleOnClick}  className="fas fa-times fa-lg"></i>
+                    </FlexDiv>
                     {this.props.detail.user === undefined ? 
                         <span></span> :
                        ( this.props.detail.user.firstName === undefined ?

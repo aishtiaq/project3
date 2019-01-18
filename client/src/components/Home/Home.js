@@ -14,7 +14,7 @@ export default () => (
     <div>
       <BodyWrapper>
         <HeaderWrapper>
-          <HeaderText>TASK MASTER
+          <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm"></i>
             <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
             <Button>
@@ -44,7 +44,7 @@ export default () => (
           </HeaderWrapper>
           <GearsLogo />
         {/* <AnimateLogo className="custom-animate">css animate goes here</AnimateLogo> */}
-        <Footer>GWBootcamp <br/> ABEER ISHTIAQ ✨ SEAN STUBBS ✨ ATHENA OLSON <br/> Copyright 2019 </Footer> 
+        <Footer>GWBootcamp <br/> ABEER ISHTIAQ ✨ SEAN STUBBS ✨ ATHENA OLSON <br/> Copyright© 2019 </Footer> 
       </BodyWrapper>
     </div>
     </ThemeProvider>

@@ -116,6 +116,7 @@ export const RegisterLogin = styled.div`
   grid-column: 3 / 6;
   grid-row: 2 / 4;
   overflow: auto;
+  font-family: 'Varela Round', sans-serif, cursive;
   @media (max-width: 832px){
     grid-column: 1 / 7;
     grid-row: 2 / 4;
