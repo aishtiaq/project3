@@ -11,3 +11,7 @@
     font-size: 12px;
     margin-top: 5px;
 }
+
+.invalid {
+    box-shadow: 0 0 5px 1px red;
+}

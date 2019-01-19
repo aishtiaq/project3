@@ -111,10 +111,18 @@ class User extends React.Component {
         if (!(password.value.length > 4)) {
             passErr.textContent = `Password must contain 4 characters`;
             confPassErr.textContent= `Password must contain 4 characters`;
+            password.classList.remove('active');
+            password.classList.add('invalid');
+            confirmPassword.classList.remove('active');
+            confirmPassword.classList.add('invalid');
             return false;
         } else if (!(password.value === confirmPassword.value)) {
             passErr.textContent = `Please confirm password's match`;
             confPassErr.textContent=`Please confirm password's match`;
+            password.classList.remove('active');
+            password.classList.add('invalid');
+            confirmPassword.classList.remove('active');
+            confirmPassword.classList.add('invalid');
             return false;
         }
     
