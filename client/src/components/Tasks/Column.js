@@ -82,10 +82,8 @@ class Column extends React.Component {
     if (this.props.teamOrUser !== 'team') {
       isAssigned='self';
       user = this.props.teamOrUser;
-      console.log("self or assigned is ");
     } else {
       isAssigned= 'assigned';
-      console.log("self or assigned is "+isAssigned);
     }
 
     var status;
@@ -108,9 +106,7 @@ class Column extends React.Component {
 
     if(user !== "") {
       task.user = user;
-      console.log("setting user to "+task.user);
     } else if(this.state.userSelected!=="") {
-      console.log("selected user is: " + this.state.userSelected);
       task.user = this.state.userSelected;
     }
     
@@ -120,13 +116,14 @@ class Column extends React.Component {
     } else {
 
       if (this.state.action === "add") {
-        console.log(task);
+        
+        if(task.status === 'Done')
+          task.completeDate = new Date();
+     
         this.props.createTask(task);
       } else {
   
         task.taskId= this.state.taskID;
-          
-        console.log(task);
         this.props.editTask(task);
       }
       this.hideModal();
