@@ -7,6 +7,8 @@ import {fetchTasks, createTask, editTask, deleteTask} from '../../actions/taskAc
 import {fetchUsers} from '../../actions/userActions';
 import { connect } from "react-redux";
 import moment from 'moment';
+import "./Validate.css";
+
 
 const Container = styled.div`
   margin: 10px;
@@ -46,6 +48,7 @@ class Column extends React.Component {
     taskName: "",
     taskDetails: "",
     taskID: "",
+    isValid: true,
     action: "",
     dueDate: "",
     errors: {},
@@ -54,7 +57,6 @@ class Column extends React.Component {
   }
 
   componentDidMount = () => {
-
     this.props.fetchUsers();
     
   }
@@ -73,7 +75,11 @@ class Column extends React.Component {
   }
 
   onChange = e => {
+    //e.target.classList.add('active');
+
     this.setState({ [e.target.id]: e.target.value });
+
+    //this.showInputError(e.target.name);
   };
 
   onSubmit = () => {
@@ -110,11 +116,11 @@ class Column extends React.Component {
       task.user = this.state.userSelected;
     }
     
-    
-    if (task.taskName === "" || task.taskDetails === "" ) {
-      alert("Must enter Task Name and Task Detail" );
+    if (!(this.showFormErrors())) {
+      console.log('form is invalid: do not submit');
     } else {
-
+      console.log('form is valid: submit');
+    
       if (this.state.action === "add") {
         
         if(task.status === 'Done')
@@ -140,8 +146,41 @@ class Column extends React.Component {
       console.log(this.props.teamOrUser);
       this.props.fetchTasks(this.props.teamOrUser);
     }
-  
   };
+
+  showFormErrors() {
+    const inputs = document.querySelectorAll('input, textarea');
+    let isFormValid = true;
+    // console.log("inputs: " + inputs);
+    inputs.forEach(input => {
+      input.classList.add('active');
+      
+      const isInputValid = this.showInputError(input.id);
+      
+      if (!isInputValid) {
+        isFormValid = false;
+      }
+    });
+
+    return isFormValid;
+  }
+  
+  showInputError(refName) {
+    // const validity = this.refName.validity;
+    
+    const field = document.getElementById(refName);
+    const label = document.getElementById(`${refName}Label`).textContent;
+    const error = document.getElementById(`${refName}Error`);
+
+    if ((field.value == "")) {
+      error.textContent = `${label} is a required field`; 
+      return false;
+    }
+
+    error.textContent = '';
+    return true;
+    
+  }
 
   editTask = (task,id) => {
     this.setState({
@@ -195,31 +234,34 @@ class Column extends React.Component {
         </Droppable>
         <Modal show={this.state.show} handleClose={this.hideModal}>
             {
-              <form>
+              <form novalidate>
                 <div className="form-group">
-                  <label htmlFor="taskName">Task Name:</label>
+                  <label id="taskNameLabel" htmlFor="taskName">Task Name:</label>
                   <input 
                     onChange={this.onChange}
                     value={this.state.taskName}
                     type="text"
-                    className="form-control" 
-                    id="taskName" 
+                    className="form-control validate" 
+                    id="taskName"
                     placeholder="Task Name" 
+                    required
                   />
                 </div>
+                <div id="taskNameError" className="taskNameError error"></div>
                 <div className="form-group">
-                  <label htmlFor="taskDetails">Task Details:</label>
+                  <label id="taskDetailsLabel" htmlFor="taskDetails">Task Details:</label>
                   <textarea 
                     onChange={this.onChange}
                     value={this.state.taskDetails}
-                    className="form-control" 
+                    className="form-control validate" 
                     id="taskDetails" 
                     rows="5" 
                     cols="30" 
                     placeholder="Task Details" 
+                    required
                   />
                 </div>
-                
+                <div id="taskDetailsError" className="taskDetailsError error"></div>
                 <div hidden = {this.props.teamOrUser==='team' ? false : true} className="form-group">
                   <label htmlFor="user">Assign To: </label>
                     <select className="form-control" id="userSelected" value={this.state.userSelected} onChange={this.onChange}>
@@ -230,16 +272,17 @@ class Column extends React.Component {
                     </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="dueDate">Due Date:</label>
+                  <label id="dueDateLabel" htmlFor="dueDate">Due Date:</label>
                   <input 
                     onChange={this.onChange}
                     value={this.state.dueDate}
                     id="dueDate" 
                     type="date" 
-                    className="form-control"
+                    className="form-control validate"
+                    required
                   />
                 </div>
-                
+                <div id="dueDateError" className="dueDateError error"></div>
                 <div className="btn-group">
                   <button type="button" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
                 </div>

@@ -245,6 +245,11 @@ bcryptjs@^2.4.3:
   resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.3.tgz#9ab5627b93e60621ff7cdac5da9733027df1d0cb"
   integrity sha1-mrVie5PmBiH/fNrF2pczAn3x0Ms=
 
+big.js@^5.0.3:
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/big.js/-/big.js-5.2.2.tgz#65f0af382f578bcdc742bd9c281e9cb2d7768328"
+  integrity sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==
+
 binary-extensions@^1.0.0:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/binary-extensions/-/binary-extensions-1.12.0.tgz#c2d780f53d45bba8317a8902d4ceeaf3a6385b14"
@@ -270,6 +275,14 @@ body-parser@1.18.3, body-parser@^1.18.3:
     qs "6.5.2"
     raw-body "2.3.3"
     type-is "~1.6.16"
+
+bootstrap-validate@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/bootstrap-validate/-/bootstrap-validate-2.1.3.tgz#f8b62f31daef1fb537956180517abcdfc32498e5"
+  integrity sha512-d02sE7JH0DRCvYxJ1yqHNmvURs5ro2GhmtBkNQVAJsdX+ySItH9+HLJ5nTyjckXOFqq0oZacIrs6EZodX7+nhg==
+  dependencies:
+    big.js "^5.0.3"
+    lodash "^4.17.10"
 
 boxen@^1.2.1:
   version "1.3.0"

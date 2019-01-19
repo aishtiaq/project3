@@ -28,6 +28,7 @@ class Register extends Component {
       if (this.props.auth.isAuthenticated) {
         this.props.history.push("/mydashboard");
       }
+      
     }
   
     componentWillReceiveProps(nextProps) {
@@ -53,17 +54,10 @@ class Register extends Component {
             password: this.state.password
         };
 
-        if (newUser.firstName === "" || newUser.lastName === "" || newUser.phone === "" || newUser.password === "") {
-          alert("Must enter all fields to register user ID");
-        } else if (newUser.password.length < 4) {
-            alert("Password must be 4 characters or more");
-        }
-        else {
           if (newUser.password === this.state.password2) {
             console.log(newUser);
             this.props.registerUser(newUser, this.props.history);
           };
-        };
     };
 
     render() {
