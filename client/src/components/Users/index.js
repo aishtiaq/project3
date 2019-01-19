@@ -7,7 +7,7 @@ import {editUser} from '../../actions/userActions';
 import {setCurrentUser} from '../../actions/authActions';
 import { ThemeProvider } from 'styled-components';
 import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, RegisterLogin } from "../Home/HomeStyle";
-
+import "../Tasks/Validate.css";
 
 const Container = styled.div`
   border: 1px solid lightgrey;
@@ -60,20 +60,67 @@ class User extends React.Component {
             password: this.state.password
         };
 
-        if (newUser.firstName === "" || newUser.lastName === "" || newUser.phone === "" || newUser.password === "") {
-            alert("Must enter all fields to update user ID");
-        } else if (newUser.password.length < 4) {
-            alert("Password must be 4 characters or more");
-        }
-        else {
-            if (newUser.password === this.state.password2) {
+        if (!(this.showFormErrors())) {
+            console.log('form is invalid: do not submit');
+        } else {
+            console.log('form is valid: submit');
             console.log(newUser);
             this.props.editUser(newUser);
             
-            };
+        };
             // window.location.replace("/");
-        }
     };
+
+    showFormErrors() {
+        const inputs = document.querySelectorAll('input');
+        let isFormValid = true;
+        
+        inputs.forEach(input => {
+          input.classList.add('active');
+          
+          const isInputValid = this.showInputError(input.id);
+          
+          if (!isInputValid) {
+            isFormValid = false;
+          }
+        });
+    
+        return isFormValid;
+      }
+
+    showInputError(refName) {
+        // const validity = this.refName.validity;
+        const field = document.getElementById(refName);
+        const label = document.getElementById(`${refName}Label`).textContent;
+        const error = document.getElementById(`${refName}Error`);
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('password2');
+        const passErr = document.getElementById('passwordError');
+        const confPassErr = document.getElementById('password2Error');
+        
+        console.log("password: "+password);
+        console.log("password value: "+password.value);
+        
+        if ((field.value == "")) {
+          error.textContent = `${label} is a required field`; 
+          return false;
+        } else {
+            error.textContent = "";
+        }
+
+        if (!(password.value.length > 4)) {
+            passErr.textContent = `Password must contain 4 characters`;
+            confPassErr.textContent= `Password must contain 4 characters`;
+            return false;
+        } else if (!(password.value === confirmPassword.value)) {
+            passErr.textContent = `Please confirm password's match`;
+            confPassErr.textContent=`Please confirm password's match`;
+            return false;
+        }
+    
+        error.textContent = '';
+        return true;
+      }
 
     render() {
         return (
@@ -121,77 +168,88 @@ class User extends React.Component {
                     
                     <form noValidate onSubmit={this.onSubmit}>
                         <div className="form-group col-md-6">
-                        <label htmlFor="firstName">First Name</label>
+                        <label id="firstNameLabel" htmlFor="firstName">First Name</label>
                         <input
                             onChange={this.onChange}
                             value={this.state.firstName}
                             // error={errors.firstName}
-                            className="form-control"
+                            className="form-control validate"
                             placeholder="First"
                             id="firstName"
                             type="text"
+                            required
                         />
                         </div>
+                        <div id="firstNameError" className="firstNameError error"></div>
                         <div className="form-group col-md-6">
-                        <label htmlFor="lastName">Last Name</label>
+                        <label id="lastNameLabel" htmlFor="lastName">Last Name</label>
                         <input
                             onChange={this.onChange}
                             value={this.state.lastName}
                             // error={errors.lastName}
-                            className="form-control"
+                            className="form-control validate"
                             placeholder="Last"
                             id="lastName"
                             type="text"
+                            required
                         />
                         </div>
+                        <div id="lastNameError" className="lastNameError error"></div>
                         <div className="form-group col-md-6">
-                        <label htmlFor="email">Email</label>
+                        <label id="emailLabel" htmlFor="email">Email</label>
                         <input disabled
                             // onChange={this.onChange}
                             value={this.state.email}
                             // error={errors.email}
-                            className="form-control"
+                            className="form-control validate"
                             // placeholder="test@test.com"
                             id="email"
                             type="email"
                         />
                         </div>
+                        <div id="emailError" className="emailError error"></div>
                         <div className="form-group col-md-6">
-                        <label htmlFor="phone">Phone #</label>
+                        <label id="phoneLabel" htmlFor="phone">Phone #</label>
                         <input
                             onChange={this.onChange}
                             value={this.state.phone}
                             // error={errors.phone}
-                            className="form-control"
+                            className="form-control validate"
                             placeholder="XXXXXXXXXX"
                             id="phone"
                             type="text"
+                            required
                         />
                         </div>
+                        <div id="phoneError" className="phoneError error"></div>
                         <div className="form-group col-md-6">
-                        <label htmlFor="password">Password</label>
+                        <label id="passwordLabel" htmlFor="password">Password</label>
                         <input
                             onChange={this.onChange}
                             value={this.state.password}
                             // error={errors.password}
-                            className="form-control"
+                            className="form-control validate"
                             placeholder="*********"
                             id="password"
                             type="password"
+                            required
                         />
                         </div>
+                        <div id="passwordError" className="passwordError error"></div>
                         <div className="form-group col-md-6">
-                        <label htmlFor="password2">Confirm Password</label>
+                        <label id="password2Label" htmlFor="password2">Confirm Password</label>
                         <input
                             onChange={this.onChange}
                             value={this.state.password2}
                             // error={errors.password2}
-                            className="form-control"
+                            className="form-control validate"
                             placeholder="*********"
                             id="password2"
                             type="password"
+                            required
                         />
                         </div>
+                        <div id="password2Error" className="password2Error error"></div>
                         <div className="col-md-6" style={{ paddingLeft: "11.250px" }}>
                         <button
                             style={{
@@ -201,7 +259,7 @@ class User extends React.Component {
                             marginTop: "1rem",
                             marginBottom: "1.5rem"
                             }}
-                            type="submit"
+                            type="submit"                            
                             className="btn btn-primary waves-effect waves-light"
                         >
                             Submit
