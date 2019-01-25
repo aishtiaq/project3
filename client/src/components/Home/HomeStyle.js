@@ -119,7 +119,7 @@ transition-duration: 0.5s;
     margin: auto;
     padding-top: 0;
     padding-bottom: 10px;
-    margin-left: -25px;
+    margin-left: -35px;
 
   };
 `;
