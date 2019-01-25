@@ -48,7 +48,7 @@ module.exports = {
               text:
                 `Task Details: ${dbModel.taskDetails}\n`+
                 `Due Date: ${dbModel.dueDate}`+
-                `\n\n Click https://gwtaskmaster.herokuapp.com" `+
+                `\n\n Click https://gwtaskmaster.herokuapp.com `+
                 `to access the application and review the tasks.`
             };
     

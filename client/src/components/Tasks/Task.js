@@ -9,7 +9,7 @@ const Container = styled.div`
   padding: 10px;
   margin-bottom: 10px;
   overflow: auto;
-  background-color: ${props => props.isDue ===1 ? '#a82828' : props.isDue ===2 ? 'yellow': 'whitesmoke'};
+  background-color: ${props => props.isDue ===1 ? '#a82828' : props.isDue ===2 ? '#ffcf11': 'whitesmoke'};
   color: ${props => props.isDue ===1 ? 'whitesmoke' : '#33363b;'};
 `;
 
