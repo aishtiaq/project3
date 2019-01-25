@@ -34,10 +34,11 @@ export default class Task extends React.Component {
   render() {
     var now = moment();
     var isDue;
+
     if(this.props.column !== 'Done')
-        if(now.zone(-5).isAfter(this.props.detail.dueDate) ) 
+        if(now.isAfter(moment(this.props.detail.dueDate).local()) ) 
             isDue=1;
-        else if (moment(this.props.detail.dueDate).zone(-5).subtract(2,"days").format("MM-DD-YYYY") === moment().format("MM-DD-YYYY")) {
+        else if (moment(this.props.detail.dueDate).local().diff(now,"days") >=0 && moment(this.props.detail.dueDate).local().diff(now,"days")<=2) {
            isDue=2;
         }  
     else    
@@ -66,10 +67,10 @@ export default class Task extends React.Component {
                        { this.props.column !== 'Done' ?
                            this.props.detail.dueDate === null ?
                             <span/> :
-                            "Due: " +  moment(this.props.detail.dueDate).zone(-5).format("M-DD-YYYY") :
+                            "Due: " +  moment(this.props.detail.dueDate).local().format("M-DD-YYYY") :
                             this.props.detail.dueDate === undefined ?
                             <span/> :
-                            "Completed: " +  moment(this.props.detail.completeDate).zone(-5).format("M-DD-YYYY")
+                            "Completed: " +  moment(this.props.detail.completeDate).local().format("M-DD-YYYY")
                         }
                     </span>    
                 </Container>
