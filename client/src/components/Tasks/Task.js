@@ -34,15 +34,13 @@ export default class Task extends React.Component {
   render() {
     var now = moment();
     var isDue;
+
     if(this.props.column !== 'Done')
-        if(now.zone(-5).isAfter(this.props.detail.dueDate) ) 
+        if(now.isAfter(moment(this.props.detail.dueDate).local()) ) 
             isDue=1;
-        else if (moment(this.props.detail.dueDate).zone(-5).subtract(2,"days").format("MM-DD-YYYY") === moment().format("MM-DD-YYYY")) {
-            console.log(this.props.detail.taskName);
-            console.log(moment().format("MM-DD-YYYY")+ " date diff is: "+moment(this.props.detail.dueDate).zone(-5).subtract(2,"days").format("MM-DD-YYYY"));
-            isDue=2;
-        }
-            
+        else if (moment(this.props.detail.dueDate).local().diff(now,"days") >=0 && moment(this.props.detail.dueDate).local().diff(now,"days")<=2) {
+           isDue=2;
+        }  
     else    
         isDue=0;
         
@@ -62,12 +60,19 @@ export default class Task extends React.Component {
                         <span></span> :
                        ( this.props.detail.user.firstName === undefined ?
                         <span/> :
-                           this.props.detail.user.firstName + " " + this.props.detail.user.lastName ) }
-                            <span className="float-right">
-                       { this.props.detail.dueDate === null ?
-                        <span/> :
-                        "Due: " +  moment(this.props.detail.dueDate).zone(-5).format("M-DD-YYYY") }
-                        </span>    
+                           this.props.detail.user.firstName + " " + this.props.detail.user.lastName ) 
+                    }
+                           
+                    <span className="float-right">
+                       { this.props.column !== 'Done' ?
+                           this.props.detail.dueDate === null ?
+                            <span/> :
+                            "Due: " +  moment(this.props.detail.dueDate).local().format("M-DD-YYYY") :
+                            this.props.detail.dueDate === undefined ?
+                            <span/> :
+                            "Completed: " +  moment(this.props.detail.completeDate).local().format("M-DD-YYYY")
+                        }
+                    </span>    
                 </Container>
             )}
         </Draggable> 

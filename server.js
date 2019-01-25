@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const mongoose = require("mongoose");
 const routes = require("./routes");
+const cron = require("./cron");
+
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -24,11 +26,12 @@ if (process.env.NODE_ENV === "production") {
 // Passport middleware
 app.use(passport.initialize());
 
-// Passport config
-// require("./config/passport")(passport);
 
 // Add routes, both API and view
 app.use(routes);
+
+cron.scheduler();
+
 
 // Connect to the Mongo DB
 mongoose.connect(

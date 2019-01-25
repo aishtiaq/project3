@@ -7,6 +7,9 @@ import {fetchTasks, createTask, editTask, deleteTask} from '../../actions/taskAc
 import {fetchUsers} from '../../actions/userActions';
 import { connect } from "react-redux";
 import moment from 'moment';
+// import "./Validate.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Container = styled.div`
   margin: 10px;
@@ -46,6 +49,7 @@ class Column extends React.Component {
     taskName: "",
     taskDetails: "",
     taskID: "",
+    isValid: true,
     action: "",
     dueDate: "",
     errors: {},
@@ -54,7 +58,6 @@ class Column extends React.Component {
   }
 
   componentDidMount = () => {
-
     this.props.fetchUsers();
     
   }
@@ -72,8 +75,24 @@ class Column extends React.Component {
       this.showModal();
   }
 
+  onDateChange= dueDate => {
+    console.log(dueDate);
+    this.setState({
+      dueDate: dueDate
+    });
+    console.log("due date is "+this.state.dueDate);
+  }
+
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
+  };
+
+  onChangeName = e => {
+    this.setState({ taskName : e.target.value });
+  };
+
+  onChangeDetails = e => {
+    this.setState({ taskDetails : e.target.value });
   };
 
   onSubmit = () => {
@@ -82,10 +101,8 @@ class Column extends React.Component {
     if (this.props.teamOrUser !== 'team') {
       isAssigned='self';
       user = this.props.teamOrUser;
-      console.log("self or assigned is ");
     } else {
       isAssigned= 'assigned';
-      console.log("self or assigned is "+isAssigned);
     }
 
     var status;
@@ -108,25 +125,34 @@ class Column extends React.Component {
 
     if(user !== "") {
       task.user = user;
-      console.log("setting user to "+task.user);
     } else if(this.state.userSelected!=="") {
-      console.log("selected user is: " + this.state.userSelected);
       task.user = this.state.userSelected;
     }
-    
-    
-    if (task.taskName === "" || task.taskDetails === "" ) {
-      alert("Must enter Task Name and Task Detail" );
-    } else {
 
+    console.log("clicked id is "+this.state.clickedID);
+  
+    document.getElementById(this.state.clickedID+"_taskName").classList.remove("is-invalid");
+    document.getElementById(this.state.clickedID+"_taskDetails").classList.remove("is-invalid");
+    document.getElementById(this.state.clickedID+"_taskNameError").textContent = "";
+    document.getElementById(this.state.clickedID+"_taskDetailsError").textContent = "";
+  
+    if(!this.validate()) {
+
+
+    // if (!(this.showFormErrors())) {
+      console.log('form is invalid: do not submit');
+    } else {
+      console.log('form is valid: submit');
+    
       if (this.state.action === "add") {
-        console.log(task);
+        
+        if(task.status === 'Done')
+          task.completeDate = new Date();
+     
         this.props.createTask(task);
       } else {
   
         task.taskId= this.state.taskID;
-          
-        console.log(task);
         this.props.editTask(task);
       }
       this.hideModal();
@@ -143,8 +169,37 @@ class Column extends React.Component {
       console.log(this.props.teamOrUser);
       this.props.fetchTasks(this.props.teamOrUser);
     }
-  
   };
+
+  validate= () => {
+
+   
+    var errors;
+  
+    if (this.state.taskName.length<=0) {
+      console.log("adding is-invalid class");
+      errors = true;
+      document.getElementById(this.state.clickedID+"_taskName").classList.add("is-invalid");
+      document.getElementById(this.state.clickedID+"_taskNameError").textContent = "Task Name cannot be empty";
+    }
+  
+    if (this.state.taskDetails.length<=0) {
+      errors = true;
+      document.getElementById(this.state.clickedID+"_taskDetails").classList.add("is-invalid");
+      document.getElementById(this.state.clickedID+"_taskDetailsError").textContent = "Task Details cannot be empty";
+    }
+  
+    if (errors) {
+  
+      return false;
+  
+    } else {
+      return true;
+    }
+  
+  
+  }
+
 
   editTask = (task,id) => {
     this.setState({
@@ -177,12 +232,17 @@ class Column extends React.Component {
         dueDate: "",
         userSelected: ""});
     this.hideModal();
+    document.getElementById(this.state.clickedID+"_taskName").classList.remove("is-invalid");
+    document.getElementById(this.state.clickedID+"_taskDetails").classList.remove("is-invalid");
+    document.getElementById(this.state.clickedID+"_taskNameError").textContent = "";
+    document.getElementById(this.state.clickedID+"_taskDetailsError").textContent = "";
+  
   }
 
   render() {
     return (
         <Container>
-        <Title>{this.props.column.title} <FloatRight><i onClick={() => this.addTask(this.props.column.id)}  className="far fa-plus-square"></i></FloatRight></Title>
+        <Title>{this.props.column.title} <FloatRight><i id={this.props.column.id} onClick={() => this.addTask(this.props.column.id)}  className="far fa-plus-square"></i></FloatRight></Title>
         <Droppable droppableId={this.props.column.id}>
           {provided => (
             <TaskList ref={provided.innerRef} {...provided.droppableProps}>
@@ -198,31 +258,37 @@ class Column extends React.Component {
         </Droppable>
         <Modal show={this.state.show} handleClose={this.hideModal}>
             {
-              <form>
+              <form novalidate>
                 <div className="form-group">
-                  <label htmlFor="taskName">Task Name:</label>
+                  <label  htmlFor={`${this.props.column.id}_taskName`} >Task Name:</label>
                   <input 
-                    onChange={this.onChange}
+                    onChange={this.onChangeName}
                     value={this.state.taskName}
                     type="text"
-                    className="form-control" 
-                    id="taskName" 
+                    className="form-control validate" 
+                    // id="taskName"
+                    id={`${this.props.column.id}_taskName`}
                     placeholder="Task Name" 
+                    required
                   />
+                  <div id={`${this.props.column.id}_taskNameError`} className="invalid-feedback"></div>
                 </div>
-                <div className="form-group">
-                  <label htmlFor="taskDetails">Task Details:</label>
+                 <div className="form-group">
+                  <label  htmlFor="taskDetails">Task Details:</label>
                   <textarea 
-                    onChange={this.onChange}
+                    onChange={this.onChangeDetails}
                     value={this.state.taskDetails}
-                    className="form-control" 
-                    id="taskDetails" 
+                    className="form-control validate" 
+                    // id="taskDetails"
+                    id={`${this.props.column.id}_taskDetails`}
                     rows="5" 
                     cols="30" 
                     placeholder="Task Details" 
+                    required
                   />
+                  <div id={`${this.props.column.id}_taskDetailsError`} className="invalid-feedback"></div>
+            
                 </div>
-                
                 <div hidden = {this.props.teamOrUser==='team' ? false : true} className="form-group">
                   <label htmlFor="user">Assign To: </label>
                     <select className="form-control" id="userSelected" value={this.state.userSelected} onChange={this.onChange}>
@@ -233,16 +299,17 @@ class Column extends React.Component {
                     </select>
                 </div>
                 <div className="form-group">
-                  <label htmlFor="dueDate">Due Date:</label>
-                  <input 
-                    onChange={this.onChange}
-                    value={this.state.dueDate}
-                    id="dueDate" 
-                    type="date" 
+                  <label id="dueDateLabel" htmlFor="dueDate">Due Date:</label>
+                  
+                  <DatePicker
+                    selected={this.state.dueDate}
+                    onChange={this.onDateChange}
+                    showTimeSelect
+                    dateFormat="Pp"
                     className="form-control"
+                    placeholderText="Select the Due Date"
                   />
                 </div>
-                
                 <div className="btn-group">
                   <button type="button" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
                 </div>
