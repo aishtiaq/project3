@@ -6,13 +6,13 @@ import styled from 'styled-components';
 import {editUser} from '../../actions/userActions';
 import {setCurrentUser} from '../../actions/authActions';
 import { ThemeProvider } from 'styled-components';
-
+import "../Tasks/Validate.css";
 import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Link1, Link2, Footer, RegisterLogin } from "../Home/HomeStyle";
 
 const theme = {
     font: "Abel, sans-serif",
   };
-import "../Tasks/Validate.css";
+
 
 
 const Container = styled.div`
