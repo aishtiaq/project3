@@ -7,8 +7,9 @@ import {fetchTasks, createTask, editTask, deleteTask} from '../../actions/taskAc
 import {fetchUsers} from '../../actions/userActions';
 import { connect } from "react-redux";
 import moment from 'moment';
-import "./Validate.css";
-
+// import "./Validate.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const Container = styled.div`
   margin: 10px;
@@ -74,12 +75,24 @@ class Column extends React.Component {
       this.showModal();
   }
 
+  onDateChange= dueDate => {
+    console.log(dueDate);
+    this.setState({
+      dueDate: dueDate
+    });
+    console.log("due date is "+this.state.dueDate);
+  }
+
   onChange = e => {
-    //e.target.classList.add('active');
-
     this.setState({ [e.target.id]: e.target.value });
+  };
 
-    //this.showInputError(e.target.name);
+  onChangeName = e => {
+    this.setState({ taskName : e.target.value });
+  };
+
+  onChangeDetails = e => {
+    this.setState({ taskDetails : e.target.value });
   };
 
   onSubmit = () => {
@@ -115,8 +128,18 @@ class Column extends React.Component {
     } else if(this.state.userSelected!=="") {
       task.user = this.state.userSelected;
     }
-    
-    if (!(this.showFormErrors())) {
+
+    console.log("clicked id is "+this.state.clickedID);
+  
+    document.getElementById(this.state.clickedID+"_taskName").classList.remove("is-invalid");
+    document.getElementById(this.state.clickedID+"_taskDetails").classList.remove("is-invalid");
+    document.getElementById(this.state.clickedID+"_taskNameError").textContent = "";
+    document.getElementById(this.state.clickedID+"_taskDetailsError").textContent = "";
+  
+    if(!this.validate()) {
+
+
+    // if (!(this.showFormErrors())) {
       console.log('form is invalid: do not submit');
     } else {
       console.log('form is valid: submit');
@@ -148,39 +171,35 @@ class Column extends React.Component {
     }
   };
 
-  showFormErrors() {
-    const inputs = document.querySelectorAll('input, textarea');
-    let isFormValid = true;
-    // console.log("inputs: " + inputs);
-    inputs.forEach(input => {
-      input.classList.add('active');
-      
-      const isInputValid = this.showInputError(input.id);
-      
-      if (!isInputValid) {
-        isFormValid = false;
-      }
-    });
+  validate= () => {
 
-    return isFormValid;
-  }
+   
+    var errors;
   
-  showInputError(refName) {
-    // const validity = this.refName.validity;
-    
-    const field = document.getElementById(refName);
-    const label = document.getElementById(`${refName}Label`).textContent;
-    const error = document.getElementById(`${refName}Error`);
-
-    if ((field.value == "")) {
-      error.textContent = `${label} is a required field`; 
-      return false;
+    if (this.state.taskName.length<=0) {
+      console.log("adding is-invalid class");
+      errors = true;
+      document.getElementById(this.state.clickedID+"_taskName").classList.add("is-invalid");
+      document.getElementById(this.state.clickedID+"_taskNameError").textContent = "Task Name cannot be empty";
     }
-
-    error.textContent = '';
-    return true;
-    
+  
+    if (this.state.taskDetails.length<=0) {
+      errors = true;
+      document.getElementById(this.state.clickedID+"_taskDetails").classList.add("is-invalid");
+      document.getElementById(this.state.clickedID+"_taskDetailsError").textContent = "Task Details cannot be empty";
+    }
+  
+    if (errors) {
+  
+      return false;
+  
+    } else {
+      return true;
+    }
+  
+  
   }
+
 
   editTask = (task,id) => {
     this.setState({
@@ -213,12 +232,17 @@ class Column extends React.Component {
         dueDate: "",
         userSelected: ""});
     this.hideModal();
+    document.getElementById(this.state.clickedID+"_taskName").classList.remove("is-invalid");
+    document.getElementById(this.state.clickedID+"_taskDetails").classList.remove("is-invalid");
+    document.getElementById(this.state.clickedID+"_taskNameError").textContent = "";
+    document.getElementById(this.state.clickedID+"_taskDetailsError").textContent = "";
+  
   }
 
   render() {
     return (
         <Container>
-        <Title>{this.props.column.title} <FloatRight><i onClick={() => this.addTask(this.props.column.id)}  className="far fa-plus-square"></i></FloatRight></Title>
+        <Title>{this.props.column.title} <FloatRight><i id={this.props.column.id} onClick={() => this.addTask(this.props.column.id)}  className="far fa-plus-square"></i></FloatRight></Title>
         <Droppable droppableId={this.props.column.id}>
           {provided => (
             <TaskList ref={provided.innerRef} {...provided.droppableProps}>
@@ -236,32 +260,35 @@ class Column extends React.Component {
             {
               <form novalidate>
                 <div className="form-group">
-                  <label id="taskNameLabel" htmlFor="taskName">Task Name:</label>
+                  <label  htmlFor={`${this.props.column.id}_taskName`} >Task Name:</label>
                   <input 
-                    onChange={this.onChange}
+                    onChange={this.onChangeName}
                     value={this.state.taskName}
                     type="text"
                     className="form-control validate" 
-                    id="taskName"
+                    // id="taskName"
+                    id={`${this.props.column.id}_taskName`}
                     placeholder="Task Name" 
                     required
                   />
+                  <div id={`${this.props.column.id}_taskNameError`} className="invalid-feedback"></div>
                 </div>
-                <div id="taskNameError" className="taskNameError error"></div>
-                <div className="form-group">
-                  <label id="taskDetailsLabel" htmlFor="taskDetails">Task Details:</label>
+                 <div className="form-group">
+                  <label  htmlFor="taskDetails">Task Details:</label>
                   <textarea 
-                    onChange={this.onChange}
+                    onChange={this.onChangeDetails}
                     value={this.state.taskDetails}
                     className="form-control validate" 
-                    id="taskDetails" 
+                    // id="taskDetails"
+                    id={`${this.props.column.id}_taskDetails`}
                     rows="5" 
                     cols="30" 
                     placeholder="Task Details" 
                     required
                   />
+                  <div id={`${this.props.column.id}_taskDetailsError`} className="invalid-feedback"></div>
+            
                 </div>
-                <div id="taskDetailsError" className="taskDetailsError error"></div>
                 <div hidden = {this.props.teamOrUser==='team' ? false : true} className="form-group">
                   <label htmlFor="user">Assign To: </label>
                     <select className="form-control" id="userSelected" value={this.state.userSelected} onChange={this.onChange}>
@@ -273,16 +300,16 @@ class Column extends React.Component {
                 </div>
                 <div className="form-group">
                   <label id="dueDateLabel" htmlFor="dueDate">Due Date:</label>
-                  <input 
-                    onChange={this.onChange}
-                    value={this.state.dueDate}
-                    id="dueDate" 
-                    type="date" 
-                    className="form-control validate"
-                    required
+                  
+                  <DatePicker
+                    selected={this.state.dueDate}
+                    onChange={this.onDateChange}
+                    showTimeSelect
+                    dateFormat="Pp"
+                    className="form-control"
+                    placeholderText="Select the Due Date"
                   />
                 </div>
-                <div id="dueDateError" className="dueDateError error"></div>
                 <div className="btn-group">
                   <button type="button" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
                 </div>
