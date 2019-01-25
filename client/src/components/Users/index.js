@@ -6,8 +6,11 @@ import styled from 'styled-components';
 import {editUser} from '../../actions/userActions';
 import {setCurrentUser} from '../../actions/authActions';
 import { ThemeProvider } from 'styled-components';
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, RegisterLogin } from "../Home/HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Link1, Link2, Footer, RegisterLogin } from "../Home/HomeStyle";
 
+const theme = {
+    font: "Abel, sans-serif",
+  };
 
 const Container = styled.div`
   border: 1px solid lightgrey;
@@ -77,37 +80,41 @@ class User extends React.Component {
 
     render() {
         return (
+            <ThemeProvider theme={theme}>
+      <div>
             <BodyWrapper>
             <HeaderWrapper>
-            <HeaderText>TASK MASTER
+            <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm"></i>
             <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
             </HeaderText>
-            <Button>
+            <Link1>
               <Link
               to="/mydashboard"
-              style={{
-                width: "140px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
-              className="btn mx-2 btn-primary"
+            //   style={{
+            //     width: "140px",
+            //     borderRadius: "3px",
+            //     letterSpacing: "1.5px"
+            //   }}
+            //   className="btn mx-2 btn-primary"
             >
-              Dashboard
+              DASHBOARD <i class="fas fa-columns"></i>
             </Link>
-            
+            </Link1>
+            <Link2>
               <Link
               to="/login"
-              style={{
-                width: "140px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px"
-              }}
+            //   style={{
+            //     width: "140px",
+            //     borderRadius: "3px",
+            //     letterSpacing: "1.5px"
+            //   }}
               onClick={this.handleLogout}
-              className="btn mx-2 btn-primary"
+            //   className="btn mx-2 btn-primary"
             >
-              Logout
+              LOGOUT <i class="fas fa-sign-out-alt"></i>
             </Link>
-            </Button>
+            </Link2>
+            
             </HeaderWrapper>
             <RegisterLogin>
             <div className="container">
@@ -120,7 +127,7 @@ class User extends React.Component {
                 </div>
                     
                     <form noValidate onSubmit={this.onSubmit}>
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                         <label htmlFor="firstName">First Name</label>
                         <input
                             onChange={this.onChange}
@@ -132,7 +139,7 @@ class User extends React.Component {
                             type="text"
                         />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                         <label htmlFor="lastName">Last Name</label>
                         <input
                             onChange={this.onChange}
@@ -144,7 +151,7 @@ class User extends React.Component {
                             type="text"
                         />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                         <label htmlFor="email">Email</label>
                         <input disabled
                             // onChange={this.onChange}
@@ -156,7 +163,7 @@ class User extends React.Component {
                             type="email"
                         />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                         <label htmlFor="phone">Phone #</label>
                         <input
                             onChange={this.onChange}
@@ -168,7 +175,7 @@ class User extends React.Component {
                             type="text"
                         />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                         <label htmlFor="password">Password</label>
                         <input
                             onChange={this.onChange}
@@ -180,7 +187,7 @@ class User extends React.Component {
                             type="password"
                         />
                         </div>
-                        <div className="form-group col-md-6">
+                        <div className="form-group col-md-12">
                         <label htmlFor="password2">Confirm Password</label>
                         <input
                             onChange={this.onChange}
@@ -192,28 +199,36 @@ class User extends React.Component {
                             type="password"
                         />
                         </div>
-                        <div className="col-md-6" style={{ paddingLeft: "11.250px" }}>
-                        <button
+                        
+                        <div className="col-md-12" style={{ paddingLeft: "11.250px" }}>
+                        
+                            <button
                             style={{
                             width: "150px",
                             borderRadius: "3px",
                             letterSpacing: "1.5px",
                             marginTop: "1rem",
-                            marginBottom: "1.5rem"
+                            marginBottom: "1.5rem",
+                            boxShadow: "0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19)",
                             }}
+                            
                             type="submit"
                             className="btn btn-primary waves-effect waves-light"
                         >
-                            Submit
+                            <div>Submit &#8594; </div>
                         </button>
+                        
                         </div>
+                        
                     </form>
                   </div>
                   </div>
             </div>
             </RegisterLogin>
-            <Footer>GWBootcamp <br/> Abeer Ishtiaq ✨ Sean Stubbs ✨ Athena Olson <br/> Copyright 2019 </Footer> 
+            <Footer>GWBootcamp <br/> ABEER ISHTIAQ ✨ SEAN STUBBS ✨ ATHENA OLSON <br/> Copyright© 2019 </Footer>
             </BodyWrapper>
+            </div>
+          </ThemeProvider>
         
         );
   }

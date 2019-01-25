@@ -3,11 +3,10 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Lists from "./Lists";
 import "react-tabs/style/react-tabs.css";
 import { ThemeProvider } from 'styled-components';
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, DashboardTasks, TabStyle, WelcomeMessage } from "../Home/HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, DashboardTasks, TabStyle, WelcomeMessage, Link2 } from "../Home/HomeStyle";
 import { setCurrentUser,logoutUser } from "../../actions/authActions";
 import {connect} from 'react-redux';
 import { Link } from "react-router-dom";
-import styled from 'styled-components';
 
 
 const theme = {
@@ -34,25 +33,29 @@ class Dashboard extends Component {
           <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm"></i>
           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
-           <Button>
+           {/* <Button> */}
              <WelcomeMessage>
              Welcome, &nbsp;
              <Link to="/updateuser" className="btn-flat waves-effect">
                    {this.props.auth.user.firstName}
              </Link>
-              <button
+             </WelcomeMessage>
+             {/* </Button> */}
+             <Link2>
+              <Link
                   to="/login"
-                  style={{
-                    width: "140px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px"
-                  }}
+                  // style={{
+                  //   width: "140px",
+                  //   borderRadius: "3px",
+                  //   letterSpacing: "1.5px"
+                  // }}
                   onClick={this.handleLogout}
-                  className="btn mx-2 btn-primary"
+                  // className="btn mx-2 btn-primary"
                 >
-                  Logout
-              </button>
-              </WelcomeMessage>
+                  LOGOUT <i class="fas fa-sign-out-alt"></i>
+              </Link>
+              </Link2>
+              
               {/* <Link
                 to="/login"
                 style={{
@@ -65,7 +68,7 @@ class Dashboard extends Component {
               >
                 Log In
               </Link> */}
-            </Button>
+            {/* </Button> */}
       </HeaderWrapper>
       
       <DashboardTasks style={dStyle}>
