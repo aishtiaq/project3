@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import { ThemeProvider } from 'styled-components';
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Link2, Footer, RegisterLogin } from "../Home/HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Link2, Footer, RegisterLogin } from "../Home/HomeStyle";
 
 const theme = {
   font: "Abel, sans-serif",
@@ -37,6 +37,12 @@ class Register extends Component {
           errors: nextProps.errors
         });
       }
+      if(nextProps.errors.email !== undefined) {
+        document.getElementById("email").classList.remove('active');
+        document.getElementById("email").classList.add('invalid');
+        document.getElementById("emailError").textContent = nextProps.errors.email;
+        
+      }
     }
     
     onChange = e => {
@@ -57,8 +63,6 @@ class Register extends Component {
         if (!(this.showFormErrors())) {
           console.log('form is invalid: do not submit');
         } else {
-          console.log('form is valid: submit');
-          console.log(newUser);
           this.props.registerUser(newUser, this.props.history);
         };
     };
@@ -81,7 +85,6 @@ class Register extends Component {
   }
 
   showInputError(refName) {
-      // const validity = this.refName.validity;
       const field = document.getElementById(refName);
       const label = document.getElementById(`${refName}Label`).textContent;
       const error = document.getElementById(`${refName}Error`);
@@ -89,8 +92,6 @@ class Register extends Component {
       const confirmPassword = document.getElementById('password2');
       const passErr = document.getElementById('passwordError');
       const confPassErr = document.getElementById('password2Error');
-      
-      console.log("error: "+error);
       
       if ((field.value == "")) {
         error.textContent = `${label} is a required field`; 
@@ -125,7 +126,7 @@ class Register extends Component {
     }
 
     render() {
-        const { errors } = this.state;
+ 
 
         return (
           <ThemeProvider theme={theme}>
@@ -167,7 +168,6 @@ class Register extends Component {
                       <input
                         onChange={this.onChange}
                         value={this.state.firstName}
-                        error={errors.firstName}
                         className="form-control validate"
                         placeholder="First"
                         id="firstName"
@@ -181,7 +181,6 @@ class Register extends Component {
                       <input
                         onChange={this.onChange}
                         value={this.state.lastName}
-                        error={errors.lastName}
                         className="form-control validate"
                         placeholder="Last"
                         id="lastName"
@@ -195,9 +194,8 @@ class Register extends Component {
                       <input
                         onChange={this.onChange}
                         value={this.state.email}
-                        error={errors.email}
                         className="form-control validate"
-                        placeholder="test@test.com"
+                        placeholder="xxxx@xxxx.xxx"
                         id="email"
                         type="email"
                         required
@@ -209,7 +207,6 @@ class Register extends Component {
                       <input
                         onChange={this.onChange}
                         value={this.state.phone}
-                        error={errors.phone}
                         className="form-control validate"
                         placeholder="XXXXXXXXXX"
                         id="phone"
@@ -223,7 +220,6 @@ class Register extends Component {
                       <input
                         onChange={this.onChange}
                         value={this.state.password}
-                        error={errors.password}
                         className="form-control validate"
                         placeholder="*********"
                         id="password"
@@ -237,7 +233,6 @@ class Register extends Component {
                       <input
                         onChange={this.onChange}
                         value={this.state.password2}
-                        error={errors.password2}
                         className="form-control validate"
                         placeholder="*********"
                         id="password2"

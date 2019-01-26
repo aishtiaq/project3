@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import { ThemeProvider } from 'styled-components';
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Link2, Footer, RegisterLogin } from "../Home/HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Link2, Footer, RegisterLogin } from "../Home/HomeStyle";
 
 const theme = {
   font: "Abel, sans-serif",
@@ -39,6 +39,15 @@ class Login extends Component {
           errors: nextProps.errors
         });
       }
+      console.log(nextProps.errors);
+      if(nextProps.errors.emailnotfound !== undefined) {
+        document.getElementById("email").classList.add("is-invalid");
+        document.getElementById("emailError").textContent = "Eamil Not Found";
+      }
+      if(nextProps.errors.passwordincorrect !== undefined) {
+        document.getElementById("password").classList.add("is-invalid");
+        document.getElementById("passwordError").textContent = "Incorrect Password";
+      }
     }
 
     onChange = e => {
@@ -48,17 +57,51 @@ class Login extends Component {
     onSubmit = e => {
         e.preventDefault();
 
-        const userData = {
-            email: this.state.email,
-            password: this.state.password
-        };
-        console.log(userData);
+        document.getElementById("email").classList.remove("is-invalid");
+        document.getElementById("password").classList.remove("is-invalid");
+        document.getElementById("emailError").textContent = "";
+        document.getElementById("passwordError").textContent = "";
+      
+        if(this.validate()) {
+          const userData = {
+              email: this.state.email,
+              password: this.state.password
+          };
 
-        this.props.loginUser(userData);
+          this.props.loginUser(userData);
+          console.log("login didnt work");
+          
+          console.log(this.state.errors);
+
+         
+        }
     };
 
+    validate= () => {
+
+   
+      var errors;
+    
+      if (this.state.email.length<=0) {
+        errors = true;
+        document.getElementById("email").classList.add("is-invalid");
+        document.getElementById("emailError").textContent = "Eamil cannot be empty";
+      }
+    
+      if (this.state.password.length<=0) {
+        errors = true;
+        document.getElementById("password").classList.add("is-invalid");
+        document.getElementById("passwordError").textContent = "Password cannot be empty";
+      }
+    
+      if (errors)     
+        return false;
+      else
+        return true;
+    }
+
     render() {
-        const { errors } = this.state;
+
     return (
       <ThemeProvider theme={theme}>
       <div>
@@ -68,11 +111,11 @@ class Login extends Component {
            <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
           <Link2>
-              <Link
-              to="/"
-            >
-              HOME <i class="fas fa-home"></i>
-            </Link>
+              <Link to="/">
+                HOME 
+                <i class="fas fa-home"></i>
+              </Link>
+
           </Link2>
         </HeaderWrapper>
           
@@ -95,23 +138,24 @@ class Login extends Component {
                     <input
                       onChange={this.onChange}
                       value={this.state.email}
-                      error={errors.email}
                       className="form-control"
-                      placeholder="test@test.com"
+                      placeholder="xxxx@xxxx.xxx"
                       id="email"
                       type="email"
                     />
+                    <div id="emailError" className="invalid-feedback"></div>
                   </div>
                   <div className="form-group col-md-12">
                     <label htmlFor="password">Password</label>
                     <input
                       onChange={this.onChange}
                       value={this.state.password}
-                      error={errors.password}
                       className="form-control"
+                      placeholder="********"
                       id="password"
                       type="password"
                     />
+                    <div id="passwordError" className="invalid-feedback"></div>
                   </div>
                   <div className="col-md-12" style={{ paddingLeft: "11.250px" }}>
                     <button
