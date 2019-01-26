@@ -9,10 +9,8 @@ export const BodyWrapper = styled.body`
   " . logocontainer logocontainer logocontainer logocontainer . "
   " footer footer footer footer footer footer ";
   background-color: #F6F6F6;
-  /* background-color: #eaeaea; */
-  /* margin: 0; */
   width: 100%;
-  height: 100%;
+  height: auto;
   position: absolute;
 `;
 
@@ -61,23 +59,6 @@ grid-area: catchphrase;
   };
 `;
 
-// export const Button = styled.div`
-// grid-area: button;
-// margin: 0;
-// padding: 0;
-// padding-top: 80px;
-// padding-right: 100px;
-// text-align: right;
-// font-size: 20px;
-// margin-left: 50px;
-//   @media (max-width: 832px){
-//     margin: auto;
-//     padding-top: 0;
-//     padding-bottom: 10px;
-//     margin-left: -15px;
-//   };
-// `;
-
 export const WelcomeMessage = styled.div`
   color: #33363b;
   font-size: 23px;
@@ -85,7 +66,6 @@ export const WelcomeMessage = styled.div`
   padding-top: 77px;
   text-align: right;
   @media (max-width: 832px){
-    /* margin-right: 100px; */
     padding-top: 0;
     padding-bottom: 10px;
     margin-left: -15px;
@@ -100,17 +80,13 @@ grid-area: link1;
 margin: 0;
 font-family: 'Abel', sans-serif;
 font-weight: bolder;
-/* padding: 0; */
 padding-top: 80px;
-/* padding-right: 100px; */
 text-align: right;
 width: 160px;
 letter-spacing: 2px;
 font-size: 20px;
 margin-left: 200px;
-/* text-align: right; */
 transition-duration: 0.5s;
-/* border-right: 1px solid #33363b; */
 :hover {
   font-size: 23px;
   transition-timing-function: ease-in-out;
@@ -129,12 +105,9 @@ grid-area: link2;
 margin: 0;
 font-family: 'Abel', sans-serif;
 font-weight: bolder;
-/* color: blue; */
-/* padding: 0; */
 padding-top: 80px;
 width: 150px;
 letter-spacing: 2px;
-/* padding-right: 175px; */
 font-size: 20px;
 margin-left: 30px;
 transition-duration: 0.5s;
@@ -150,19 +123,6 @@ transition-duration: 0.5s;
     text-align: center;
   };
 `;
-
-// export const AnimateLogo = styled.div`
-//   font-family: ${props => props.theme.font};
-//   grid-area: logo;
-//   grid-column: 5 / 9;
-//   grid-row: 2 / 6;
-//   font-size: 40px;
-//   margin: 50px 0 50px 0;
-//   text-align: center;
-//   color: black;
-//   border: black solid 2px;
-//   height: 500px;
-// `;
 
 export const Footer = styled.div`
   font-family: ${props => props.theme.font};
@@ -182,8 +142,6 @@ export const Footer = styled.div`
   };
 `;
 
-/* Register & Login pages - Body Style to hold the forms */
-
 export const RegisterLogin = styled.div`
   grid-area: registerlogin;
   grid-column: 3 / 6;
@@ -196,8 +154,6 @@ export const RegisterLogin = styled.div`
       overflow: scroll;
     };
 `;
-
-/* Dashboard page - Body Style to hold the task lists */
 
 export const DashboardTasks = styled.section`
   grid-column: 1 / 7;
@@ -213,12 +169,9 @@ export const DashboardTasks = styled.section`
     };
 `;    
 
-// Styles tabs on Dashboard w/ font & color (TABS ONLY)
 export const TabStyle = styled.div`
   color: yellowgreen;
-  /* color: white; */
   background-color: #33363b;
-  /* background-color: white; */
   font-family: 'Varela Round', sans-serif, cursive;
   font-size: 20px;
 `;  

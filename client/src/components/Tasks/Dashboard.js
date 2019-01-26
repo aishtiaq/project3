@@ -30,7 +30,7 @@ class Dashboard extends Component {
         <div>
         <BodyWrapper>
         <HeaderWrapper>
-          <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm"></i>
+          <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm fa-spin"></i>
           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
              <WelcomeMessage>
@@ -47,7 +47,6 @@ class Dashboard extends Component {
                   LOGOUT <i class="fas fa-sign-out-alt"></i>
               </Link>
               </Link2>
-              
       </HeaderWrapper>
       
       <DashboardTasks style={dStyle}>
