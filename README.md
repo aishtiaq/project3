@@ -1,9 +1,9 @@
 # Task Master
-A MERN full stack Agile Project Management web app.
+A MERN full stack Agile Project Management web app. Created by Abeer Ishtiaq, Sean Stubbs, Athena Olson.
 
 [![N|Solid](https://cloudinary-res.cloudinary.com/image/upload/c_limit,h_540,w_770/f_auto,fl_lossy,q_auto/roajtdilgzhoasmx6yaag.png)](https://gwtaskmaster.herokuapp.com/)
 
-Our app that allows users to create individual tasks, and team tasks that they can share with their team members.
+An app that allows users to create individual tasks, and team tasks that they can share with their team members.
 ### Features
   - Users sign up using their personal information and create a username and password (use Heroku link for team tasks)
   - Sign into the app
