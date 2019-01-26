@@ -142,18 +142,12 @@ class User extends React.Component {
       <div>
             <BodyWrapper>
             <HeaderWrapper>
-            <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm"></i>
+            <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm fa-spin"></i>
             <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
             </HeaderText>
             <Link1>
               <Link
               to="/mydashboard"
-            //   style={{
-            //     width: "140px",
-            //     borderRadius: "3px",
-            //     letterSpacing: "1.5px"
-            //   }}
-            //   className="btn mx-2 btn-primary"
             >
               DASHBOARD <i class="fas fa-columns"></i>
             </Link>
@@ -161,13 +155,7 @@ class User extends React.Component {
             <Link2>
               <Link
               to="/login"
-            //   style={{
-            //     width: "140px",
-            //     borderRadius: "3px",
-            //     letterSpacing: "1.5px"
-            //   }}
               onClick={this.handleLogout}
-            //   className="btn mx-2 btn-primary"
             >
               LOGOUT <i class="fas fa-sign-out-alt"></i>
             </Link>

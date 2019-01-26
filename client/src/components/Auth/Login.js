@@ -64,18 +64,12 @@ class Login extends Component {
       <div>
       <BodyWrapper>
         <HeaderWrapper>
-          <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm"></i>
+          <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm fa-spin"></i>
            <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
           <Link2>
               <Link
               to="/"
-              // style={{
-              //   width: "140px",
-              //   borderRadius: "3px",
-              //   letterSpacing: "1.5px"
-              // }}
-              // className="btn mx-2 btn-primary"
             >
               HOME <i class="fas fa-home"></i>
             </Link>
