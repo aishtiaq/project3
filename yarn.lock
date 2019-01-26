@@ -2196,11 +2196,6 @@ react-datepicker@^2.0.0:
     react-onclickoutside "^6.7.1"
     react-popper "^1.0.2"
 
-react-html-id@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/react-html-id/-/react-html-id-0.1.5.tgz#a180084bd8974aac6a497ebaaedcecb03aadf2bf"
-  integrity sha512-8MvS/oeD7EE9jlIM/iNc2HtyN5mzFLK9DHGThuucxJYnGVYfOR1ZVRkE5znJmKbj8PMDXnrnozjDdHcSQJO3LA==
-
 react-is@^16.3.2, react-is@^16.6.0, react-is@^16.6.3:
   version "16.7.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.7.0.tgz#c1bd21c64f1f1364c6f70695ec02d69392f41bfa"

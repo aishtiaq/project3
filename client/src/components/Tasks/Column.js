@@ -23,6 +23,13 @@ const Container = styled.div`
   
 `;
 
+const DatePickerStyle = styled.div`
+width: 350px;
+@media (max-width: 832px){
+    width: auto;
+  };
+`;
+
 const Title = styled.div`
   padding: 10px;
   color: #254c69;
@@ -301,6 +308,8 @@ class Column extends React.Component {
                 <div className="form-group">
                   <label id="dueDateLabel" htmlFor="dueDate">Due Date:</label>
                   
+                  
+                  <DatePickerStyle>
                   <DatePicker
                     selected={this.state.dueDate}
                     onChange={this.onDateChange}
@@ -309,7 +318,10 @@ class Column extends React.Component {
                     className="form-control"
                     placeholderText="Select the Due Date"
                   />
-                </div>
+                  </DatePickerStyle>
+                  
+                  </div>
+                
                 <div className="btn-group">
                   <button type="button" className="btn btn-primary" onClick={this.onSubmit}>Submit</button>
                 </div>
