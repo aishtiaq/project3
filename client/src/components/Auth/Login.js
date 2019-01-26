@@ -25,13 +25,13 @@ class Login extends Component {
     componentDidMount() {
       // If logged in and user navigates to Login page, should redirect them to dashboard
       if (this.props.auth.isAuthenticated) {
-        this.props.history.push("/mydashboard");
+        this.props.history.push("/dashboard");
       }
     }
   
     componentWillReceiveProps(nextProps) {
       if (nextProps.auth.isAuthenticated) {
-        this.props.history.push("/mydashboard");
+        this.props.history.push("/dashboard");
       }
   
       if (nextProps.errors) {
@@ -39,7 +39,6 @@ class Login extends Component {
           errors: nextProps.errors
         });
       }
-      console.log(nextProps.errors);
       if(nextProps.errors.emailnotfound !== undefined) {
         document.getElementById("email").classList.add("is-invalid");
         document.getElementById("emailError").textContent = "Eamil Not Found";
@@ -68,12 +67,7 @@ class Login extends Component {
               password: this.state.password
           };
 
-          this.props.loginUser(userData);
-          console.log("login didnt work");
-          
-          console.log(this.state.errors);
-
-         
+          this.props.loginUser(userData); 
         }
     };
 

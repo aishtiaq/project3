@@ -44,7 +44,7 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/mydashboard" component={Dashboard} />
+          <PrivateRoute exact path="/dashboard" component={Dashboard} />
           <PrivateRoute exact path="/updateuser" component={User} />
         </Switch>
       </div>

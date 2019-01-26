@@ -8,8 +8,6 @@ const opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = keys.secretOrKey;
 
-// module.exports = passport => {
-//   console.log("in passport.js");
   passport.use(
     new JwtStrategy(opts, (jwt_payload, done) => {
       db.Users.findById(jwt_payload.id)

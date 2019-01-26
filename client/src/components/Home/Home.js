@@ -1,6 +1,6 @@
 import React from "react";
 import { ThemeProvider } from 'styled-components';
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Link1, Link2, Footer, AnimateLogo } from "./HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Link1, Link2, Footer } from "./HomeStyle";
 import { Link } from "react-router-dom";
 import PersonInGear from "./GearsLogo";
 
