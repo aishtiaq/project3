@@ -3,7 +3,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Lists from "./Lists";
 import "react-tabs/style/react-tabs.css";
 import { ThemeProvider } from 'styled-components';
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Footer, DashboardTasks, TabStyle, WelcomeMessage, Link2 } from "../Home/HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Footer, DashboardTasks, TabStyle, WelcomeMessage, Link2 } from "../Home/HomeStyle";
 import { setCurrentUser,logoutUser } from "../../actions/authActions";
 import {connect} from 'react-redux';
 import { Link } from "react-router-dom";
@@ -33,42 +33,21 @@ class Dashboard extends Component {
           <HeaderText>TASK MASTER <i className="fas fa-cog fa-sm"></i>
           <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
           </HeaderText>
-           {/* <Button> */}
              <WelcomeMessage>
              Welcome, &nbsp;
              <Link to="/updateuser" className="btn-flat waves-effect">
                    {this.props.auth.user.firstName}
              </Link>
              </WelcomeMessage>
-             {/* </Button> */}
              <Link2>
               <Link
                   to="/login"
-                  // style={{
-                  //   width: "140px",
-                  //   borderRadius: "3px",
-                  //   letterSpacing: "1.5px"
-                  // }}
                   onClick={this.handleLogout}
-                  // className="btn mx-2 btn-primary"
                 >
                   LOGOUT <i class="fas fa-sign-out-alt"></i>
               </Link>
               </Link2>
               
-              {/* <Link
-                to="/login"
-                style={{
-                  width: "140px",
-                  borderRadius: "3px",
-                  letterSpacing: "1.5px",
-                }}
-                onClick={this.handleLogout}
-                className="btn mx-2 btn-primary"
-              >
-                Log In
-              </Link> */}
-            {/* </Button> */}
       </HeaderWrapper>
       
       <DashboardTasks style={dStyle}>

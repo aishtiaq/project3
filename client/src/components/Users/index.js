@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link , withRouter } from "react-router-dom";
-import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import styled from 'styled-components';
 import {editUser} from '../../actions/userActions';
-import {setCurrentUser} from '../../actions/authActions';
+import {setCurrentUser,logoutUser} from '../../actions/authActions';
 import { ThemeProvider } from 'styled-components';
 import "../Tasks/Validate.css";
-import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Button, Link1, Link2, Footer, RegisterLogin } from "../Home/HomeStyle";
+import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Link1, Link2, Footer, RegisterLogin } from "../Home/HomeStyle";
 
 const theme = {
     font: "Abel, sans-serif",
@@ -49,6 +48,11 @@ class User extends React.Component {
             password: this.props.auth.user.password
         })
     }
+
+    handleLogout = e => {
+        e.preventDefault();
+        this.props.logoutUser();
+      };
 
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
@@ -146,31 +150,18 @@ class User extends React.Component {
             <CatchPhrase>Be Effective. Be On Time. Be Awesome.</CatchPhrase>
             </HeaderText>
             <Link1>
-              <Link
-              to="/mydashboard"
-            //   style={{
-            //     width: "140px",
-            //     borderRadius: "3px",
-            //     letterSpacing: "1.5px"
-            //   }}
-            //   className="btn mx-2 btn-primary"
-            >
-              DASHBOARD <i class="fas fa-columns"></i>
-            </Link>
+                <Link
+                to="/mydashboard">
+                  DASHBOARD <i class="fas fa-columns"></i>
+                </Link>
             </Link1>
             <Link2>
-              <Link
-              to="/login"
-            //   style={{
-            //     width: "140px",
-            //     borderRadius: "3px",
-            //     letterSpacing: "1.5px"
-            //   }}
-              onClick={this.handleLogout}
-            //   className="btn mx-2 btn-primary"
-            >
-              LOGOUT <i class="fas fa-sign-out-alt"></i>
-            </Link>
+                <Link
+                to="/login"
+                onClick={this.handleLogout}
+                >
+                    LOGOUT <i class="fas fa-sign-out-alt"></i>
+                </Link>
             </Link2>
             
             </HeaderWrapper>
@@ -323,6 +314,6 @@ const mapStateToProps = state => ({
     auth: state.auth
   });
   
-export default connect(mapStateToProps, {editUser, setCurrentUser})(User);
+export default connect(mapStateToProps, {editUser, setCurrentUser,logoutUser})(User);
 
 
