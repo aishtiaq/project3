@@ -83,11 +83,9 @@ class Column extends React.Component {
   }
 
   onDateChange= dueDate => {
-    console.log(dueDate);
     this.setState({
       dueDate: dueDate
     });
-    console.log("due date is "+this.state.dueDate);
   }
 
   onChange = e => {
@@ -121,7 +119,6 @@ class Column extends React.Component {
       status = 'Done'
     }  
 
-    console.log("due date is "+ this.state.dueDate);
     var task = {
       taskName: this.state.taskName,
       taskDetails: this.state.taskDetails,
@@ -136,7 +133,6 @@ class Column extends React.Component {
       task.user = this.state.userSelected;
     }
 
-    console.log("clicked id is "+this.state.clickedID);
   
     document.getElementById(this.state.clickedID+"_taskName").classList.remove("is-invalid");
     document.getElementById(this.state.clickedID+"_taskDetails").classList.remove("is-invalid");
@@ -144,13 +140,8 @@ class Column extends React.Component {
     document.getElementById(this.state.clickedID+"_taskDetailsError").textContent = "";
   
     if(!this.validate()) {
-
-
-    // if (!(this.showFormErrors())) {
       console.log('form is invalid: do not submit');
     } else {
-      console.log('form is valid: submit');
-    
       if (this.state.action === "add") {
         
         if(task.status === 'Done')
@@ -172,19 +163,14 @@ class Column extends React.Component {
         dueDate: "",
         userSelected: "",
       selfOrAssigned: ""});
-
-      console.log(this.props.teamOrUser);
       this.props.fetchTasks(this.props.teamOrUser);
     }
   };
 
   validate= () => {
-
-   
     var errors;
   
     if (this.state.taskName.length<=0) {
-      console.log("adding is-invalid class");
       errors = true;
       document.getElementById(this.state.clickedID+"_taskName").classList.add("is-invalid");
       document.getElementById(this.state.clickedID+"_taskNameError").textContent = "Task Name cannot be empty";
@@ -196,15 +182,10 @@ class Column extends React.Component {
       document.getElementById(this.state.clickedID+"_taskDetailsError").textContent = "Task Details cannot be empty";
     }
   
-    if (errors) {
-  
+    if (errors) 
       return false;
-  
-    } else {
+    else 
       return true;
-    }
-  
-  
   }
 
 
@@ -222,9 +203,7 @@ class Column extends React.Component {
   }
 
   deleteTask = (id) => {
-    console.log("in delete task" +id);
     this.props.deleteTask(id);
-    console.log(this.props.teamOrUser);
     this.props.fetchTasks(this.props.teamOrUser);
   }
 

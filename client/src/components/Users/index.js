@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import styled from 'styled-components';
 import {editUser} from '../../actions/userActions';
 import {setCurrentUser,logoutUser} from '../../actions/authActions';
 import { ThemeProvider } from 'styled-components';
@@ -11,16 +10,6 @@ import { BodyWrapper, HeaderWrapper, HeaderText, CatchPhrase, Link1, Link2, Foot
 const theme = {
     font: "Abel, sans-serif",
   };
-
-
-
-const Container = styled.div`
-  border: 1px solid lightgrey;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 10px;
-  background-color: whitesmoke;
-`;
 
 class User extends React.Component {
     constructor() {
@@ -37,8 +26,6 @@ class User extends React.Component {
         };
     }
     componentDidMount() {
-        // this.props.setCurrentUser();
-        console.log(this.props.auth.user);
         this.setState({
             firstName: this.props.auth.user.firstName,
             lastName: this.props.auth.user.lastName,
@@ -73,8 +60,6 @@ class User extends React.Component {
         if (!(this.showFormErrors())) {
             console.log('form is invalid: do not submit');
         } else {
-            console.log('form is valid: submit');
-            console.log(newUser);
             this.props.editUser(newUser);
             
         };
@@ -108,10 +93,7 @@ class User extends React.Component {
         const passErr = document.getElementById('passwordError');
         const confPassErr = document.getElementById('password2Error');
         
-        console.log("password: "+password);
-        console.log("password value: "+password.value);
-        
-        if ((field.value == "")) {
+        if ((field.value === "")) {
           error.textContent = `${label} is a required field`; 
           return false;
         } else {
@@ -151,7 +133,7 @@ class User extends React.Component {
             </HeaderText>
             <Link1>
                 <Link
-                to="/mydashboard">
+                to="/dashboard">
                   DASHBOARD <i class="fas fa-columns"></i>
                 </Link>
             </Link1>

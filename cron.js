@@ -15,8 +15,7 @@ module.exports = {
             .find({ dueDate: {$lte: today}, status: {$ne: 'Done'}, user: {$ne: null}})
             .populate('user')
             .then(dbModel => {
-                console.log("over due results");
-                console.log(dbModel);
+              
                 for(var i=0; i<dbModel.length; i++) {
 
                     const transporter = nodemailer.createTransport({

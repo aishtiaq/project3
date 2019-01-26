@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import { fetchTasks, editTask } from '../../actions/taskActions'
 import {DragDropContext} from 'react-beautiful-dnd';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import { logoutUser } from "../../actions/authActions";
 
@@ -41,7 +40,6 @@ class Lists extends Component {
         
         if ( source.index !== destination.index ||
           source.droppableId !== destination.droppableId) {
-            console.log(draggableId);
             var status = '';
             if (destination.droppableId==='column-new') {
               status = 'New'
@@ -55,7 +53,6 @@ class Lists extends Component {
                 taskId: draggableId,
                 completeDate: status === 'Done' ? new Date() : null
               }
-            console.log(task);
             this.props.editTask(task);
             (this.props.whichList === 'team') ? this.props.fetchTasks("team") : this.props.fetchTasks(this.props.whichList);
         }

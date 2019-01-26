@@ -16,7 +16,6 @@ export const fetchUsers = () => dispatch => {
 };
 
 export const editUser = userData => dispatch => {
-  console.log(userData);
   axios.put("/api/users/"+userData.userId, userData )
     .then(res => 
       dispatch({

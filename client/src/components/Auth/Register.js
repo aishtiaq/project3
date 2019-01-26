@@ -26,7 +26,7 @@ class Register extends Component {
     componentDidMount() {
       // If logged in and user navigates to Register page, should redirect them to dashboard
       if (this.props.auth.isAuthenticated) {
-        this.props.history.push("/mydashboard");
+        this.props.history.push("/dashboard");
       }
       
     }
@@ -93,7 +93,7 @@ class Register extends Component {
       const passErr = document.getElementById('passwordError');
       const confPassErr = document.getElementById('password2Error');
       
-      if ((field.value == "")) {
+      if ((field.value === "")) {
         error.textContent = `${label} is a required field`; 
         return false;
       } else {

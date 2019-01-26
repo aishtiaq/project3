@@ -19,7 +19,7 @@ module.exports = {
             password: req.body.password,
             phone: req.body.phone
           };
-          console.log(newUser);
+          
           // Hash password before saving in database
           bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(newUser.password, salt, (err, hash) => {

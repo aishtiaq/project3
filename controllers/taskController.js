@@ -25,15 +25,12 @@ module.exports = {
       .create(req.body)
       .then(dbModel => {
         res.json(dbModel);
-        console.log("mode is");
-        console.log(dbModel);
         if(req.body.selfOrAssigned==="assigned" && dbModel.user !== "" ) {
-          console.log("user is "+ dbModel.user);
+          
           db.Users
           .findOne({ _id: dbModel.user })
           .then(user => {
-            console.log("user found ");
-            console.log("env var "+process.env.EMAIL_ADD);
+            
             const transporter = nodemailer.createTransport({
               service: 'gmail',
               auth: {
