@@ -31,8 +31,7 @@ class User extends React.Component {
             lastName: this.props.auth.user.lastName,
             email: this.props.auth.user.email,
             phone: this.props.auth.user.phone,
-            userId: this.props.auth.user.id,
-            password: this.props.auth.user.password
+            userId: this.props.auth.user.id
         })
     }
 
@@ -60,14 +59,15 @@ class User extends React.Component {
         if (!(this.showFormErrors())) {
             console.log('form is invalid: do not submit');
         } else {
-            this.props.editUser(newUser);
+            console.log("editing user");
+            console.log(newUser);
+            this.props.editUser(newUser, this.props.history);
             
         };
-            // window.location.replace("/");
     };
 
     showFormErrors() {
-        const inputs = document.querySelectorAll('input');
+        const inputs = document.querySelectorAll('.validate');
         let isFormValid = true;
         
         inputs.forEach(input => {
@@ -100,15 +100,7 @@ class User extends React.Component {
             error.textContent = "";
         }
 
-        if (!(password.value.length > 4)) {
-            passErr.textContent = `Password must contain 4 characters`;
-            confPassErr.textContent= `Password must contain 4 characters`;
-            password.classList.remove('active');
-            password.classList.add('invalid');
-            confirmPassword.classList.remove('active');
-            confirmPassword.classList.add('invalid');
-            return false;
-        } else if (!(password.value === confirmPassword.value)) {
+        if (!(password.value === confirmPassword.value)) {
             passErr.textContent = `Please confirm password's match`;
             confPassErr.textContent=`Please confirm password's match`;
             password.classList.remove('active');
@@ -165,7 +157,6 @@ class User extends React.Component {
                         <input
                             onChange={this.onChange}
                             value={this.state.firstName}
-                            // error={errors.firstName}
                             className="form-control validate"
                             placeholder="First"
                             id="firstName"
@@ -181,7 +172,6 @@ class User extends React.Component {
                         <input
                             onChange={this.onChange}
                             value={this.state.lastName}
-                            // error={errors.lastName}
                             className="form-control validate"
                             placeholder="Last"
                             id="lastName"
@@ -229,8 +219,7 @@ class User extends React.Component {
                         <input
                             onChange={this.onChange}
                             value={this.state.password}
-                            // error={errors.password}
-                            className="form-control validate"
+                            className="form-control"
                             placeholder="*********"
                             id="password"
                             type="password"
@@ -245,8 +234,7 @@ class User extends React.Component {
                         <input
                             onChange={this.onChange}
                             value={this.state.password2}
-                            // error={errors.password2}
-                            className="form-control validate"
+                            className="form-control"
                             placeholder="*********"
                             id="password2"
                             type="password"

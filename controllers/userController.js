@@ -95,7 +95,7 @@ module.exports = {
             payload,
             keys.secretOrKey,
             {
-              expiresIn: 31556926 // 1 year in seconds
+              expiresIn: 3600 // 1 hour in seconds
             },
             (err, token) => {
               res.json({
@@ -113,7 +113,6 @@ module.exports = {
     });
   },
   findAll: function(req, res) {
-    // passport.authenticate("jwt", {session: false})
     db.Users
       .find(req.query)
       .sort({ date: -1 })
@@ -121,9 +120,79 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   updateUser: function(req, res) {
-    db.Users
-      .findOneAndUpdate({ _id: req.params.id }, req.body)
-      .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err));
+    const editUser = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      phone: req.body.phone
+    };
+    
+
+    if(req.body.password !== "") {
+      // Hash password before saving in database
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(req.body.password, salt, (err, hash) => {
+          if (err) throw err;
+          editUser.password = hash;
+
+          db.Users
+            .findOneAndUpdate({ _id: req.params.id }, editUser, {new: true})
+            .then(user => {
+              const payload = {
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                phone: user.phone,
+                email: user.email
+              };
+
+              // Sign token
+              jwt.sign(
+                payload,
+                keys.secretOrKey,
+                {
+                  expiresIn: 3600 // 1 hour in seconds
+                },
+                (err, token) => {
+                  res.json({
+                    success: true,
+                    token: "Bearer " + token
+                  });
+                }
+              );
+            })
+            .catch(err => res.status(422).json(err));
+          
+        });
+      });
+    } else {
+        db.Users
+        .findOneAndUpdate({ _id: req.params.id }, editUser, {new: true})
+        .then(user => {
+          const payload = {
+            id: user.id,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            phone: user.phone,
+            email: user.email
+          };
+
+          // Sign token
+          jwt.sign(
+            payload,
+            keys.secretOrKey,
+            {
+              expiresIn: 3600 // 1 hour in seconds
+            },
+            (err, token) => {
+              res.json({
+                success: true,
+                token: "Bearer " + token
+              });
+            }
+          );
+        })
+        .catch(err => res.status(422).json(err));
+  }
   }
 }
