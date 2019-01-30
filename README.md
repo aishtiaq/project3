@@ -17,6 +17,7 @@ An app that allows users to create individual tasks, and team tasks that they ca
     - Upon new user creation
     - At overdue tasks and tasks about to be overdue (nightly)
     - When a task is assigned to a user
+  - All backend and front end routes are secure. If a user isn't authenticated, they will be unable to make the API calls.
 
 ### Technologies
   - MERN Stack (MongoDB, Express.js, React.js, Node.js)
